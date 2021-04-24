@@ -1,0 +1,27 @@
+<header>
+    <title>@title</title>
+    <meta charset="utf-8"/>
+    @css 'assets/site.css'
+</header>
+
+
+<div class=top-bar>
+  <div class="top-bar-element">
+    <a href="/about"> &#x1F6C8; about this </a>
+  </div>
+  <div class="top-bar-element">
+    <a href="/reload"> &#x21bb; reload posts </a>
+  </div>
+</div>
+
+
+</br>
+</br>
+
+<div class=post-list-container>
+  @for post in posts
+    <div class=post-list>
+      <a class=topic href="@post.url"> &#x270E; @post.title</a> <span class=time> @post.time</span>
+    </div>
+  @end
+</div>

@@ -1,0 +1,15 @@
+<header>
+    <title>@post_title</title>
+    <meta charset="utf-8"/>
+    @css 'assets/site.css'
+</header>
+
+<h1>@post_title</h1>
+
+<div class=post>
+@for line in lines
+    <p>
+    @line
+    </p>
+@end
+</div>
