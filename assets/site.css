@@ -1,6 +1,7 @@
 html {
   font-family: monospace;
-  background:#eea47fd2;
+  background:#353535;
+  color: #ffffff
 }
 
 /* .post-list-container {
@@ -15,7 +16,7 @@ html {
 .post-list-container{
   min-width: 30%;
   max-width: 80%;
-  background:#00539c87;
+  background:#3c6e71;
   padding: 10px;
   border: solid 3px black;
 }
@@ -26,10 +27,14 @@ html {
   padding-bottom: 2em;
 }
 
+a {
+  color: #ffffff;
+}
+
 .post {
   min-width: 30%;
   max-width: 80%;
-  background:#00539c87;
+  background:#3c6e71;
   padding: 10px;
   border: solid 3px black;
   text-align: justify;
