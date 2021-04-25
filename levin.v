@@ -113,6 +113,30 @@ fn write_post(title string) {
   }
 }
 
+fn is_hhh(line string) bool {
+  return is_h_star(line, 3)
+}
+
+fn is_hh(line string) bool {
+  return is_h_star(line, 2)
+}
+
+fn is_h(line string) bool {
+  return is_h_star(line, 1)
+}
+
+fn is_other(line string) bool {
+  return !is_h(line) &&
+         !is_hh(line) &&
+         !is_hhh(line)
+}
+
+fn is_h_star(line string, count int) bool {
+  l := line.split(" ")[0].trim_space()
+  return l.starts_with("#") && l.count("#") == count
+}
+
+
 pub fn (mut app App) init_server() {
   println("server started!")
   app.mount_static_folder_at(os.resource_abs_path('.'), '/')

@@ -8,8 +8,17 @@
 
 <div class=post>
 @for line in lines
-    <p>
-    @line
-    </p>
+    @if is_h(line)
+        <h1>@line</h1>
+    @end
+    @if is_hh(line)
+        <h2>@line</h2>
+    @end
+    @if is_hhh(line)
+        <h3>@line</h3>
+    @end
+    @if is_other(line)
+        <p> @line </p>
+    @end
 @end
 </div>
