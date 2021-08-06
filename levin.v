@@ -8,13 +8,13 @@ import time
 
 const (
 	port = 8082
-  title = "lἔνin"
+  title = "levin"
 )
 
 struct App {
 	vweb.Context
 mut:
-	posts []Post
+	posts shared []Post
 }
 
 struct Post {
@@ -139,16 +139,19 @@ fn is_h_star(line string, count int) bool {
 
 pub fn (mut app App) init_server() {
   println("server started!")
+  //app.handle_static("assets", false)
   app.mount_static_folder_at(os.resource_abs_path('.'), '/')
-  app.posts = get_posts()
 }
 
 fn main() {
   name := cmdline.option(os.args, "new", "empty")
   start := 'start' in os.args
 
+  mut app := App{}
+
   if start {
-    vweb.run<App>(port)
+    app.init_server()
+    vweb.run(app, port)
   }
   else if name != 'empty' {
     write_post(name)
@@ -157,14 +160,14 @@ fn main() {
     posts := get_posts()
     println("found ${posts.len} posts")
     for post in posts {
-        println(post.url)
+      println(post.url)
     }
   }
 }
 
 
 pub fn (mut app App) index() vweb.Result {
-  posts := app.posts
+  posts := get_posts()
   return $vweb.html()
 }
 
@@ -189,8 +192,5 @@ pub fn (mut app App) error() vweb.Result {
 }
 
 pub fn (mut app App) reload() vweb.Result {
-  app.posts = get_posts()
-  app.redirect("/")
-  return app.text("reloaded")
+  return app.redirect("/")
 }
-

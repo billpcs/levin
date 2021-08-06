@@ -4,27 +4,25 @@ html {
   color: #ffffff
 }
 
-/* .post-list-container {
-  background-size: 15em;
-  padding-left: 2em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  border-radius: 1em;
-  max-width: 35em;
-} */
-
 .post-list-container{
   min-width: 30%;
   max-width: 80%;
-  background:#3c6e71;
+  background: #3c6e71;
   padding: 10px;
   border: solid 3px black;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .post-list {
   background-size: 10em;
   padding-top: 1em;
   padding-bottom: 2em;
+}
+
+.post-list:hover {
+  background-color: #353534;
+  border-radius: 10px 10px 10px 10px;
 }
 
 a {
@@ -42,11 +40,19 @@ a {
 }
 
 .time {
-  float: right;
+  float: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .topic {
-  float: left;
+  float: right;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .top-bar-element {
@@ -59,12 +65,3 @@ a {
 }
 
 
-/* .post-list {
-  font-family: monospace;
-  background:rgba(0, 83, 156, 0.542);
-  background-size: 10em;
-  padding-left: 3em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  max-width: 30em;
-} */
