@@ -90,11 +90,13 @@ fn get_posts() []Post {
   return posts
 }
 
-fn find_post_by_name(url string) ?Post {
-  posts := get_posts()
-  for post in posts {
-    if url == post.url {
-      return post
+fn (mut app App) find_post_by_name(url string) ?Post {
+  rlock app.posts {
+    for post in app.posts {
+      println(post.url)
+      if url == post.url {
+        return post
+      }
     }
   }
   return error('not found this post')
@@ -147,7 +149,9 @@ fn main() {
   name := cmdline.option(os.args, "new", "empty")
   start := 'start' in os.args
 
-  mut app := App{}
+  mut app := App{
+    posts: get_posts()
+  }
 
   if start {
     app.init_server()
@@ -157,7 +161,7 @@ fn main() {
     write_post(name)
   }
   else {
-    posts := get_posts()
+    posts := rlock {app.posts}
     println("found ${posts.len} posts")
     for post in posts {
       println(post.url)
@@ -167,14 +171,13 @@ fn main() {
 
 
 pub fn (mut app App) index() vweb.Result {
-  posts := get_posts()
   return $vweb.html()
 }
 
 
 ['/:post']
 pub fn (mut app App) post(name string) vweb.Result {
-  post := find_post_by_name(name) or {
+  post := app.find_post_by_name(name) or {
     app.redirect("/error")
     Post{}
   }
@@ -192,5 +195,9 @@ pub fn (mut app App) error() vweb.Result {
 }
 
 pub fn (mut app App) reload() vweb.Result {
+  /* There is a bug here and the app locks forever */
+  // lock app.posts {
+  //   app.posts = get_posts()
+  // }
   return app.redirect("/")
 }
