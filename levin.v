@@ -93,7 +93,6 @@ fn get_posts() []Post {
 fn (mut app App) find_post_by_name(url string) ?Post {
   rlock app.posts {
     for post in app.posts {
-      println(post.url)
       if url == post.url {
         return post
       }
