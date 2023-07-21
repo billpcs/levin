@@ -107,7 +107,7 @@ fn write_post(title string) {
     time: timeval
     url: url(title)
   }
-  os.write_file("./posts/${post.title}",post.to_string()) or {
+  os.write_file("./posts/${post.title}",post.header()) or {
     println("failed to write")
   }
 }
@@ -166,6 +166,9 @@ fn main() {
 }
 
 pub fn (mut app App) index() vweb.Result {
+	lock app.posts {
+    app.posts = get_posts()
+  }
   return $vweb.html()
 }
 
@@ -176,13 +179,6 @@ pub fn (mut app App) about() vweb.Result {
 pub fn (mut app App) notfound() vweb.Result {
 	app.set_status(404, 'Not Found')
   return $vweb.html()
-}
-
-pub fn (mut app App) reload() vweb.Result {
-  lock app.posts {
-    app.posts = get_posts()
-  }
-  return app.redirect("/")
 }
 
 ['/:post']
