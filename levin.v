@@ -5,6 +5,7 @@ import os.cmdline
 import vweb
 import crypto.md5
 import time
+import json
 
 const (
 	port = 8082
@@ -21,47 +22,44 @@ struct Post {
 mut:
   title string
   time string
-  text string
+  text []string
   url string
 }
 
 fn url(title string) string {
-  return md5.hexhash(title)
-  // return hash(title)
+	// eight digits of the hash should be enough
+  return md5.hexhash(title)[0..8]
 }
 
-fn hash(s string) string {
-  return s.to_lower().hash().str()
+fn (p Post) header() string {
+	return '{ "title": \"${p.title}\", "time": \"${p.time}\" }'
+}
+
+fn (p Post) json() string {
+	return json.encode(p)
 }
 
 fn (p Post) to_string() string {
-  return "| title ; ${p.title}\n" +
-         "| time  ; ${p.time}\n"
+	return "${p.url} @ [${p.time}] - \"${p.title}\""
 }
 
-fn read_post(path string) ?Post {
-  n_metadata := 2
-  mut post := Post{}
-  cont := os.read_lines(path) ?
-  related := cont[0..n_metadata].filter(it.starts_with("|"))
-  for i,line in related {
-    if i > 3 { break }
-    splited := line.split(";")
-    if splited.len > 1 {
-      of_interest := splited[0].trim("| ")
-      if of_interest == 'title' {
-        post.title = splited[1].trim_space()
-      }
-      else if of_interest == 'time' {
-        post.time = splited[1].trim_space()
-      }
-    }
-  }
-  if cont.len > n_metadata+1 {
-    post.text = cont[n_metadata+1..].join_lines()
-  }
-  post.url = url(post.title)
-  return post
+fn read_post(path string) !Post {
+  content := os.read_lines(path)!
+
+	// first line must always be the metadata
+	metadata := json.decode(Post, content[0])!
+
+	mut post_text := []string{}
+	for line in content[1..].filter(it != "") {
+			post_text << line
+	}
+
+	return Post {
+		title: metadata.title,
+		time: metadata.time,
+		text: post_text,
+		url: url(metadata.title)
+	}
 }
 
 fn compare_porst_dates(a &Post, b &Post) int {
@@ -90,7 +88,7 @@ fn get_posts() []Post {
   return posts
 }
 
-fn (mut app App) find_post_by_name(url string) ?Post {
+fn (mut app App) find_post_by_name(url string) !Post {
   rlock app.posts {
     for post in app.posts {
       if url == post.url {
@@ -103,10 +101,10 @@ fn (mut app App) find_post_by_name(url string) ?Post {
 
 
 fn write_post(title string) {
-  time := time.now().str()
+  timeval := time.now().str()
   post := Post {
     title: title.to_lower()
-    time: time
+    time: timeval
     url: url(title)
   }
   os.write_file("./posts/${post.title}",post.to_string()) or {
@@ -140,7 +138,6 @@ fn is_h_star(line string, count int) bool {
 
 pub fn (mut app App) init_server() {
   println("server started!")
-  //app.handle_static("assets", false)
   app.mount_static_folder_at(os.resource_abs_path('.'), '/')
 }
 
@@ -161,27 +158,14 @@ fn main() {
   }
   else {
     posts := rlock {app.posts}
-    println("found ${posts.len} posts")
+    println("${posts.len} posts in database")
     for post in posts {
-      println(post.url)
+			println(post.to_string())
     }
   }
 }
 
-
 pub fn (mut app App) index() vweb.Result {
-  return $vweb.html()
-}
-
-
-['/:post']
-pub fn (mut app App) post(name string) vweb.Result {
-  post := app.find_post_by_name(name) or {
-    app.redirect("/error")
-    Post{}
-  }
-  post_title := post.title
-  lines := post.text.split("\n")
   return $vweb.html()
 }
 
@@ -189,14 +173,25 @@ pub fn (mut app App) about() vweb.Result {
   return $vweb.html()
 }
 
-pub fn (mut app App) error() vweb.Result {
+pub fn (mut app App) notfound() vweb.Result {
+	app.set_status(404, 'Not Found')
   return $vweb.html()
 }
 
 pub fn (mut app App) reload() vweb.Result {
-  /* There is a bug here and the app locks forever */
-  // lock app.posts {
-  //   app.posts = get_posts()
-  // }
+  lock app.posts {
+    app.posts = get_posts()
+  }
   return app.redirect("/")
+}
+
+['/:post']
+pub fn (mut app App) post(name string) vweb.Result {
+  post := app.find_post_by_name(name) or {
+    app.redirect("/notfound")
+    Post{}
+  }
+  post_title := post.title
+  lines := post.text
+  return $vweb.html()
 }
