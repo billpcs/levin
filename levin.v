@@ -1,22 +1,23 @@
 module main
 
 import os
-import os.cmdline
 import vweb
 import crypto.md5
 import time
 import json
+import cli
 
 const (
 	port       = 8082
-	title      = 'levin'
+	app_name   = 'levin'
 	posts_path = './posts/'
 )
 
 struct App {
 	vweb.Context
 mut:
-	posts shared []Post
+	posts    shared []Post
+	commands cli.Command
 }
 
 struct Post {
@@ -112,6 +113,8 @@ fn write_post(title string, contents []string) {
 	for paragraph in contents {
 		os.write_file(path, paragraph) or { println('failed to write a paragraph') }
 	}
+
+	println("created new post '${title}'")
 }
 
 fn is_hhh(line string) bool {
@@ -140,28 +143,58 @@ pub fn (mut app App) init_server() {
 	app.mount_static_folder_at(os.resource_abs_path('.'), '/')
 }
 
-fn main() {
-	name := cmdline.option(os.args, 'new', 'empty')
-	start := 'start' in os.args
-
+fn cmd_start(cmd cli.Command) ! {
 	mut app := App{
 		posts: get_posts()
 	}
+	app.init_server()
+	vweb.run(app, port)
+}
 
-	if start {
-		app.init_server()
-		vweb.run(app, port)
-	} else if name != 'empty' {
-		write_post(name, [])
-	} else {
-		posts := lock {
-			app.posts
-		}
-		println('${posts.len} posts in database')
-		for post in posts {
-			println(post.to_string())
-		}
+fn cmd_new(cmd cli.Command) ! {
+	title := cmd.args[0]
+	write_post(title, [])
+	return
+}
+
+fn cmd_db(cmd cli.Command) ! {
+	posts := get_posts()
+	println('${posts.len} posts in database')
+	for post in posts {
+		println(post.to_string())
 	}
+}
+
+fn main() {
+	mut commands := cli.Command{
+		name: '${app_name}'
+		description: 'static blog'
+		execute: fn (cmd cli.Command) ! {
+			println('see -help')
+			return
+		}
+		commands: [
+			cli.Command{
+				name: 'start'
+				description: 'start serving the web page'
+				execute: cmd_start
+			},
+			cli.Command{
+				name: 'new'
+				description: 'create template for new post'
+				execute: cmd_new
+				required_args: 1
+				usage: '<title>'
+			},
+			cli.Command{
+				name: 'db'
+				execute: cmd_db
+			},
+		]
+	}
+
+	commands.setup()
+	commands.parse(os.args)
 }
 
 pub fn (mut app App) index() vweb.Result {
