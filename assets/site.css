@@ -1,26 +1,27 @@
 html {
   font-family: monospace;
+  font-size: 135%;
   background:#353535;
   color: #ffffff
 }
 
 .post-list-container{
-  min-width: 20%;
-  max-width: 50%;
-  background: #3c6e71;
-  padding: 10px;
-  border: solid 3px black;
+  min-width: 65%;
+  max-width: 75%;
+  background: #1a1a1a;
+  padding: 4%;
+  border: solid 4px black;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 2em;
 }
 
-.post-list {
-  background-size: 10em;
-  padding-top: 1em;
-  padding-bottom: 2em;
+.post-list-item {
+  padding-top: 1%;
+  padding-bottom: 3%;
 }
 
-.post-list:hover {
+.post-list-item:hover {
   background-color: #353534;
   border-radius: 10px 10px 10px 10px;
 }
@@ -29,56 +30,78 @@ a {
   color: #ffffff;
 }
 
+
+.post-page {
+  position: relative;
+}
+
+.post-container {
+  min-width: 75%;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .post-title {
   font-size: xxx-large;
   font-family: monospace;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  min-width: 30%;
-  max-width: 80%;
-  background:#3c6e71;
+  max-width: 50%;
+  background:#1a1a1a;
   padding: 10px;
   border: solid 3px black;
   column-count: 1;
 }
 
+
 .post {
   margin-left: auto;
   margin-right: auto;
-  min-width: 30%;
-  max-width: 80%;
-  background:#3c6e71;
-  padding: 10px;
+  max-width: 100%;
+  background:#1a1a1a;
+  padding: 2%;
   border: solid 3px black;
   text-align: justify;
   text-justify: inter-word;
   column-count: 3;
-  column-width: 10px;
-  column-gap: 50px;
-  column-rule-style: dotted;
+  column-gap: 5%;
+  column-rule-style: groove;
   font-family: monospace;
 }
 
+.highlighted {
+  border: solid 3px white;
+  padding: 5%;
+  text-justify: inter-character;
+}
+
+.highlighted:hover {
+  color: #1a1a1a;
+  background-color: white;
+}
+
+
 .time {
-  float: left;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-right: 10px;
-  margin-left: 10px;
+  float: right;
 }
 
 .topic {
-  float: right;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-right: 10px;
-  margin-left: 10px;
+  float: left;
+}
+
+.top-bar {
+  padding-bottom: 5%;
 }
 
 .top-bar-element {
   float: left;
-  padding-inline-end: 1em;
+  padding-inline-end: 1%;
+}
+
+.top-bar-element:hover {
+  background-color: #1a1a1a;
 }
 
 .about-text {

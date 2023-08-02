@@ -117,6 +117,11 @@ fn write_post(title string, contents []string) {
 	println("created new post '${title}'")
 }
 
+fn is_highlight(line string) bool {
+	l := line.split(' ')[0].trim_space()
+	return l.starts_with('>')
+}
+
 fn is_hhh(line string) bool {
 	return is_h_star(line, 3)
 }
@@ -130,12 +135,17 @@ fn is_h(line string) bool {
 }
 
 fn is_other(line string) bool {
-	return !is_h(line) && !is_hh(line) && !is_hhh(line)
+	return !is_h_star(line, 0) && !is_highlight(line)
 }
 
 fn is_h_star(line string, count int) bool {
 	l := line.split(' ')[0].trim_space()
-	return l.starts_with('#') && l.count('#') == count
+	if count <= 0 {
+		return l.starts_with('#')
+	}
+	else {
+		return l.starts_with('#') && l.count('#') == count
+	}
 }
 
 pub fn (mut app App) init_server() {

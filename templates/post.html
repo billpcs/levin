@@ -4,21 +4,43 @@
     @css 'assets/site.css'
 </header>
 
-<h1 class=post-title>@post_title</h1>
 
-<div class=post>
-@for line in lines
-    @if is_h(line)
-        <h1>@line</h1>
-    @end
-    @if is_hh(line)
-        <h2>@line</h2>
-    @end
-    @if is_hhh(line)
-        <h3>@line</h3>
-    @end
-    @if is_other(line)
-        <p> @line </p>
-    @end
-@end
+<div class=post-page>
+
+    <div class=top-bar>
+      <div class="top-bar-element">
+        <a href="/">> home </a>
+      </div>
+      <div class="top-bar-element">
+        <a href="/about">> about this </a>
+      </div>
+    </div>
+
+    <div class=post-container> 
+
+        <h1 class=post-title>@post_title</h1>
+
+        <div class=post>
+        @for line in lines
+            @if is_h(line)
+                <h1>@line</h1>
+            @end
+            @if is_hh(line)
+                <h2>@line</h2>
+            @end
+            @if is_hhh(line)
+                <h3>@line</h3>
+            @end
+            @if is_highlight(line)
+                <p class="highlighted">
+                    @line
+                </p>
+            @end
+            @if is_other(line)
+                <p> @line </p>
+            @end
+        @end
+        </div>
+
+    </div>
 </div>
