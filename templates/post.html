@@ -3,49 +3,66 @@
     <meta charset="utf-8"/>
     @css 'assets/site.css'
     <link rel="stylesheet" href="assets/prism.css">
-    <script src="assets/prism.js"></script>
+    
 </header>
 
 
-<div class=post-page>
-
-    <div class=top-bar>
-      <div class="top-bar-element">
-        <a href="/">> home </a>
-      </div>
-      <div class="top-bar-element">
-        <a href="/about">> about this </a>
-      </div>
-    </div>
-
-    <div class=post-container> 
-
-        <h1 class=post-title>@post_title</h1>
-
-        <div class=post>
-        @for chunk in chunks 
-            @if chunk.is_h()
-                <h1>@chunk.text</h1>
-            @end
-            @if chunk.is_hh()
-                <h2>@chunk.text</h2>
-            @end
-            @if chunk.is_hhh()
-                <h3>@chunk.text</h3>
-            @end
-            @if chunk.is_highlight()
-                <p class="highlighted">
-                    @chunk.text
-                </p>
-            @end
-            @if chunk.is_code()
-                <pre><code class=@chunk.lang >@chunk.text</code></pre>
-            @end
-            @if chunk.is_text()
-                <p> @chunk.text </p>
-            @end
-        @end
+<body>
+    <div class=post-page>
+        <div class=top-bar>
+          <div class="top-bar-element">
+            <a href="/">> home </a>
+          </div>
+          <div class="top-bar-element">
+            <a href="/about">> about this </a>
+          </div>
         </div>
 
-    </div>
-</div>
+        <div class=post-container> 
+
+            <h1 class=post-title>@post_title</h1>
+
+            <div class=post>
+            @for chunk in chunks 
+                @if chunk.is_h()
+                    <h1>@chunk.text</h1>
+                @end
+
+                @if chunk.is_hh()
+                    <h2>@chunk.text</h2>
+                @end
+
+                @if chunk.is_hhh()
+                    <h3>@chunk.text</h3>
+                @end
+
+                @if chunk.is_highlight()
+                    <p class="highlighted">
+                        @chunk.text
+                    </p>    
+                @end
+
+                @if chunk.is_quote()
+                    <blockquote>
+                        <p class="quoted">
+                            @chunk.text
+                        </p>    
+                    </blockquote>
+                    
+                @end
+
+                @if chunk.is_code()
+                    <pre><code class=@chunk.metadata>@chunk.text</code></pre>
+                @end
+
+                @if chunk.is_text()
+                    <p> @chunk.text </p>
+                @end
+            @end
+            </div>
+
+        </div>
+    </div>   
+
+    <script src="assets/prism.js"></script>
+</body>

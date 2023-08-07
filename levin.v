@@ -28,36 +28,41 @@ mut:
 	url   string
 }
 
-type Chunk = Header | HHeader | HHHeader | Text | Code | Highlight
+type Chunk = Header | HHeader | HHHeader | Text | Code | Highlight | Quote
 
 struct Code {
-	lang string
+	metadata string
 	text string
 }
 
 struct Highlight {
-	lang string
+	metadata string
+	text string
+}
+
+struct Quote {
+	metadata string
 	text string
 }
 
 struct Text {
-	lang string
+	metadata string
 	text string
 }
 
 struct Header {
-	lang string
+	metadata string
 	text string
 }
 
 struct HHeader {
 	text string
-	lang string
+	metadata string
 }
 
 struct HHHeader {
 	text string
-	lang string
+	metadata string
 }
 
 pub fn (c Chunk) is_code() bool {
@@ -102,6 +107,13 @@ pub fn (c Chunk) is_hhh() bool {
 	}
 }
 
+pub fn (c Chunk) is_quote() bool {
+	return match c {
+		Quote {true}
+		else {false}
+	}
+}
+
 
 
 
@@ -129,33 +141,34 @@ fn parse_post_text(text []string) []Chunk {
 		line = text[i]
 		if is_h(line) {
 			chunked << Header {
-				text: line
-				lang: "text"
+				text: line.all_after("#")
+				metadata: "text"
 			}
 		}
 		else if is_hh(line) {
 			chunked << HHeader {
-				text: line
-				lang: "text"
+				text: line.all_after("##")
+				metadata: "text"
 			}
 		}
 		else if is_hhh(line) {
 			chunked << HHHeader {
-				text: line
-				lang: "text"
+				text: line.all_after("###")
+				metadata: "text"
 			}
 		}
 		else if is_highlight(line) {
 			chunked << Highlight {
-				text: line
-				lang: "text"
+				text: line.all_after("| ")
+				metadata: "text"
 			}
 		}
-		// format is
-		// @# language-*
-		// ...
-		// @# end
-		else if line.starts_with("@#") {
+		else if is_quote(line) {
+			chunked << Quote {
+				text: line.all_after("> ")
+			}
+		}
+		else if is_code(line) {
 			lang_start := line.split(" ")
 			if lang_start.len > 1 {
 				if lang_start[1].starts_with("language-") {
@@ -167,7 +180,7 @@ fn parse_post_text(text []string) []Chunk {
 						i += 1
 					}
 					chunked << Code {
-						lang: lang
+						metadata: lang 
 						text: code_str
 					}
 				}
@@ -176,7 +189,7 @@ fn parse_post_text(text []string) []Chunk {
 		else {
 			chunked << Text {
 				text: line
-				lang: "text"
+				metadata: "text"
 			}
 		}
 	}
@@ -260,10 +273,17 @@ fn write_post(title string, contents []string) {
 
 fn is_highlight(line string) bool {
 	l := line.split(' ')[0].trim_space()
+	return l.starts_with('|')
+}
+
+fn is_quote(line string) bool {
+	l := line.split(' ')[0].trim_space()
 	return l.starts_with('>')
 }
 
-fn is_code()
+fn is_code(line string) bool {
+	return line.starts_with("@#")
+}
 
 fn is_hhh(line string) bool {
 	return is_h_star(line, 3)

@@ -1,6 +1,6 @@
 html {
   font-family: monospace;
-  font-size: 100%;
+  font-size: 1vw;
   background:#353535;
   color: #ffffff
 }
@@ -10,31 +10,17 @@ a {
 }
 
 .post-list-container{
-  min-width: 65%;
-  max-width: 75%;
+  min-width: 80%;
+  max-width: 90%;
   background: #1a1a1a;
   padding: 4%;
   border: solid 4px black;
   margin-left: auto;
   margin-right: auto;
   border-radius: 2em;
-}
-
-.post-list-item {
-  height: 3em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.post-list-item:hover {
-  background-color: #353534;
-  border-radius: 10px 10px 10px 10px;
-}
-
-.time-topic-container {
-  height: 3em;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1%;
 }
 
 .post-page {
@@ -77,30 +63,49 @@ a {
   font-family: monospace;
 }
 
-.highlighted {
+.quoted {
   border: solid 3px white;
   padding: 5%;
   text-justify: inter-character;
 }
 
-.highlighted:hover {
+.quoted:hover {
   color: #1a1a1a;
   background-color: white;
 }
 
+.highlighted {
+  font-weight: bold;
+  text-justify: inter-character;
+}
 
-.time {
-  float: right;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  max-width: 40%;
+.highlighted:hover {
+  color: #000000;
+  font-weight: lighter;
+  background-color: yellow;
+}
+
+.time-topic-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.time-topic-container:hover {
+  background-color: #353534;
+/*  border-radius: 2% 2% 2% 2%;*/
 }
 
 .topic {
-  max-width: 40%;
-  text-align: left;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  order: 0;
+  flex-basis: 70%;
+}
+
+.time {
+  order: 1;
 }
 
 .top-bar {
@@ -119,7 +124,6 @@ a {
 .about-text {
   caret-color: chocolate;
 }
-
 
 @media screen and (max-width: 992px) {
   .post-list-container {
