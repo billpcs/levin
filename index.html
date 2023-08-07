@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<meta charset="utf-8"/>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/prism.css">
+  <script src="assets/prism.js"></script>
+</head>
+
+
 
 <header>
     <title>@app_name</title>
     @css 'assets/site.css'
 </header>
 
+
+<body>
 
 <div class=top-bar>
   <div class="top-bar-element">
@@ -22,8 +30,15 @@
 <div class=post-list-container>
   @for post in app.posts
     <div class=post-list-item>
-      <span class=time> @post.time</span>
-      <a class=topic href="@post.url"> &#x270E; @post.title</a> 
+      <div class=time-topic-container>
+        <div class=time> @post.time</div>
+        <div class=topic>
+          <a href="@post.url"> &#x270E; @post.title</a> 
+        </div>
+      </div>
     </div>
   @end
 </div>
+
+
+</body>

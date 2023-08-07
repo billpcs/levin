@@ -5,6 +5,10 @@ html {
   color: #ffffff
 }
 
+a {
+  color: #ffffff;
+}
+
 .post-list-container{
   min-width: 65%;
   max-width: 75%;
@@ -17,8 +21,9 @@ html {
 }
 
 .post-list-item {
-  padding-top: 1%;
-  padding-bottom: 3%;
+  height: 3em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .post-list-item:hover {
@@ -26,10 +31,11 @@ html {
   border-radius: 10px 10px 10px 10px;
 }
 
-a {
-  color: #ffffff;
+.time-topic-container {
+  height: 3em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
-
 
 .post-page {
   position: relative;
@@ -85,10 +91,16 @@ a {
 
 .time {
   float: right;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  max-width: 40%;
 }
 
 .topic {
-  float: left;
+  max-width: 40%;
+  text-align: left;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .top-bar {
@@ -109,3 +121,19 @@ a {
 }
 
 
+@media screen and (max-width: 992px) {
+  .post-list-container {
+    min-width: 10%;
+    max-width: 100%; 
+  }
+
+  .post-list-item {
+    height: 9em;
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
+
+  .post {
+    column-count: 1;
+  }
+}
