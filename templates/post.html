@@ -2,6 +2,8 @@
     <title>@post_title</title>
     <meta charset="utf-8"/>
     @css 'assets/site.css'
+    <link rel="stylesheet" href="assets/prism.css">
+    <script src="assets/prism.js"></script>
 </header>
 
 
@@ -21,23 +23,26 @@
         <h1 class=post-title>@post_title</h1>
 
         <div class=post>
-        @for line in lines
-            @if is_h(line)
-                <h1>@line</h1>
+        @for chunk in chunks 
+            @if chunk.is_h()
+                <h1>@chunk.text</h1>
             @end
-            @if is_hh(line)
-                <h2>@line</h2>
+            @if chunk.is_hh()
+                <h2>@chunk.text</h2>
             @end
-            @if is_hhh(line)
-                <h3>@line</h3>
+            @if chunk.is_hhh()
+                <h3>@chunk.text</h3>
             @end
-            @if is_highlight(line)
+            @if chunk.is_highlight()
                 <p class="highlighted">
-                    @line
+                    @chunk.text
                 </p>
             @end
-            @if is_other(line)
-                <p> @line </p>
+            @if chunk.is_code()
+                <pre><code class=@chunk.lang >@chunk.text</code></pre>
+            @end
+            @if chunk.is_text()
+                <p> @chunk.text </p>
             @end
         @end
         </div>

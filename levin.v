@@ -24,9 +24,86 @@ struct Post {
 mut:
 	title string
 	time  string
-	text  []string
+	text  []Chunk
 	url   string
 }
+
+type Chunk = Header | HHeader | HHHeader | Text | Code | Highlight
+
+struct Code {
+	lang string
+	text string
+}
+
+struct Highlight {
+	lang string
+	text string
+}
+
+struct Text {
+	lang string
+	text string
+}
+
+struct Header {
+	lang string
+	text string
+}
+
+struct HHeader {
+	text string
+	lang string
+}
+
+struct HHHeader {
+	text string
+	lang string
+}
+
+pub fn (c Chunk) is_code() bool {
+	return match c {
+		Code {true}
+		else {false}
+	}
+}
+
+pub fn (c Chunk) is_highlight() bool {
+	return match c {
+		Highlight {true}
+		else {false}
+	}
+}
+
+pub fn (c Chunk) is_text() bool {
+	return match c {
+		Text {true}
+		else {false}
+	}
+}
+
+pub fn (c Chunk) is_h() bool {
+	return match c {
+		Header {true}
+		else {false}
+	}
+}
+
+pub fn (c Chunk) is_hh() bool {
+	return match c {
+		HHeader {true}
+		else {false}
+	}
+}
+
+pub fn (c Chunk) is_hhh() bool {
+	return match c {
+		HHHeader {true}
+		else {false}
+	}
+}
+
+
+
 
 fn url(title string) string {
 	// eight digits of the hash should be enough
@@ -45,6 +122,68 @@ fn (p Post) to_string() string {
 	return "${p.url} @ [${p.time}] - \"${p.title}\""
 }
 
+fn parse_post_text(text []string) []Chunk {
+	mut line := ""
+	mut chunked := []Chunk{}
+	for i := 0; i < text.len; i += 1 {
+		line = text[i]
+		if is_h(line) {
+			chunked << Header {
+				text: line
+				lang: "text"
+			}
+		}
+		else if is_hh(line) {
+			chunked << HHeader {
+				text: line
+				lang: "text"
+			}
+		}
+		else if is_hhh(line) {
+			chunked << HHHeader {
+				text: line
+				lang: "text"
+			}
+		}
+		else if is_highlight(line) {
+			chunked << Highlight {
+				text: line
+				lang: "text"
+			}
+		}
+		// format is
+		// @# language-*
+		// ...
+		// @# end
+		else if line.starts_with("@#") {
+			lang_start := line.split(" ")
+			if lang_start.len > 1 {
+				if lang_start[1].starts_with("language-") {
+					i += 1
+					lang := lang_start[1]
+					mut code_str := "" 
+					for ! text[i].starts_with("@# end") {
+						code_str += "${text[i]}\n"
+						i += 1
+					}
+					chunked << Code {
+						lang: lang
+						text: code_str
+					}
+				}
+			}
+		}
+		else {
+			chunked << Text {
+				text: line
+				lang: "text"
+			}
+		}
+	}
+
+	return chunked
+}
+
 fn read_post(path string) !Post {
 	content := os.read_lines(path)!
 
@@ -56,10 +195,12 @@ fn read_post(path string) !Post {
 		post_text << line
 	}
 
+	post_chunked_text := parse_post_text(post_text)
+
 	return Post{
 		title: metadata.title
 		time: metadata.time
-		text: post_text
+		text: post_chunked_text
 		url: url(metadata.title)
 	}
 }
@@ -121,6 +262,8 @@ fn is_highlight(line string) bool {
 	l := line.split(' ')[0].trim_space()
 	return l.starts_with('>')
 }
+
+fn is_code()
 
 fn is_hhh(line string) bool {
 	return is_h_star(line, 3)
@@ -230,6 +373,6 @@ pub fn (mut app App) post(name string) vweb.Result {
 		Post{}
 	}
 	post_title := post.title
-	lines := post.text
+	chunks := post.text
 	return $vweb.html()
 }
