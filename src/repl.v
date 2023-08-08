@@ -1,5 +1,6 @@
 import time
 import readline
+import math
 
 fn show_db() {
 	posts := get_posts()
@@ -10,29 +11,37 @@ fn show_db() {
 }
 
 fn reaload_posts(mut app &App) {
+	posts := get_posts()
 	lock app.posts {
-		app.posts = get_posts()
+		app.posts = posts
 	}
-	println("posts were reloaded")
+	app.info("posts were reloaded (${posts.len} in db)")
 }
 
-fn show_uptime(started time.Time) {
-	now := time.now()
-	elapsed := now - started
+fn handle_loglevel(mut app &App) {
+}
 
-	if elapsed < 1 * time.minute {
-		println("${elapsed.seconds()} seconds")
+fn show_uptime(mut app &App) {
+	now := time.now()
+	elapsed := now - app.start_time
+
+	str := if elapsed < 1 * time.minute {
+		"uptime: ${elapsed.seconds():.0} sec"
 	}
 	else if elapsed < 60 * time.minute {
-		println("${elapsed.minutes()} minutes")
+		"uptime: ${elapsed.minutes():.0} min"
 	}
 	else if elapsed < 24 * time.hour {
-		println("${elapsed.hours()} hours")
+		"uptime: ${elapsed.hours():.0} h"
 	}
 	else {
-		println("${elapsed.days()} days")
+		days := elapsed.hours() / 24
+		hours := math.fmod(elapsed.hours(), 24)
+		"uptime: ${days:.0} days, ${hours:.0} h"
 	}
 
+	println(str)
+	app.debug(str)
 }
 
 fn show_help() {
@@ -64,14 +73,18 @@ fn commander(mut app &App) {
 				show_db()
 			}
 			"uptime", "up", "u" {
-				show_uptime(app.start_time)
+				show_uptime(mut app)
+			}
+			"loglevel", "log", "l" {
+				handle_loglevel(mut app)
 			}
 			"quit", "exit", "q" {
 				println("shuting down server...")
 				exit(0)
 			}
 			else {
-				println("unknown command")
+				println("unknown command '${answer}'")
+				show_help()
 			}
 		}
 
