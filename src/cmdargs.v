@@ -1,5 +1,6 @@
 import cli
 import vweb
+import time
 
 fn cmd_base() cli.Command {
 	return cli.Command{
@@ -31,12 +32,22 @@ fn cmd_base() cli.Command {
 }
 
 fn cmd_start(cmd cli.Command) ! {
+
+	// log_file := os.open_append(log_file_path) or {
+	// 	println("failed to open logfile, writing to stdout")
+	// 	os.stdout()
+	// }
+
 	mut app := App{
 		posts: get_posts()
+		logger: Logger {
+			level: LogLevel.debug
+		}
+		start_time: time.now()
 	}
 
-	app.init_server()
 	spawn commander(mut &app)
+	app.init_server()
 	vweb.run(app, port)
 }
 
@@ -47,9 +58,5 @@ fn cmd_new(cmd cli.Command) ! {
 }
 
 fn cmd_db(cmd cli.Command) ! {
-	posts := get_posts()
-	println('${posts.len} posts in database')
-	for post in posts {
-		println(post.to_string())
-	}
+	show_db()
 }
