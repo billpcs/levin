@@ -20,9 +20,6 @@ fn (mut app App) init_server() {
 
 
 pub fn (mut app App) index() vweb.Result {
-	lock app.posts {
-		app.posts = get_posts()
-	}
 	return $vweb.html()
 }
 
