@@ -2,10 +2,10 @@ module main
 
 import os
 import vweb
-import crypto.md5
 import time
 import json
 import cli
+import readline
 
 const (
 	port       = 8082
@@ -115,14 +115,8 @@ pub fn (c Chunk) is_quote() bool {
 }
 
 
-
-
-fn url(title string) string {
-	// eight digits of the hash should be enough
-	return md5.hexhash(title)[0..8]
-}
-
 fn (p Post) header() string {
+	// must be in one line, the first line of the post
 	return "{ \"title\": \"${p.title}\", \"time\": \"${p.time}\" }"
 }
 
@@ -200,6 +194,10 @@ fn parse_post_text(text []string) []Chunk {
 fn read_post(path string) !Post {
 	content := os.read_lines(path)!
 
+	// the file name becomes the url
+	// to ensure uniqueness
+	url := os.file_name(path)
+
 	// first line must always be the metadata
 	metadata := json.decode(Post, content[0])!
 
@@ -213,8 +211,8 @@ fn read_post(path string) !Post {
 	return Post{
 		title: metadata.title
 		time: metadata.time
+		url: url
 		text: post_chunked_text
-		url: url(metadata.title)
 	}
 }
 
@@ -251,22 +249,28 @@ fn (mut app App) find_post_by_name(url string) !Post {
 	return error('could not find this post')
 }
 
-fn write_post(title string, contents []string) {
+fn write_post(title string, contents ...string) {
 	timeval := time.now().str()
+	file_name := title.to_lower().replace(" ", "-")
 
 	post := Post{
-		title: title.to_lower()
+		title: title
 		time: timeval
-		url: url(title)
+		url: file_name
 	}
 
-	path := '${posts_path}${post.title}'
+	path := '${posts_path}${file_name}'
 
-	os.write_file(path, post.header()) or { println('failed to write post header') }
+	mut str_data := ""
 
-	for paragraph in contents {
-		os.write_file(path, paragraph) or { println('failed to write a paragraph') }
+	str_data += post.header()
+	str_data += "\n\n"
+
+	for line in contents {
+		str_data += line 
 	}
+
+	os.write_file(path, str_data) or { println('failed to write post header') }
 
 	println("created new post '${title}'")
 }
@@ -320,13 +324,40 @@ fn cmd_start(cmd cli.Command) ! {
 	mut app := App{
 		posts: get_posts()
 	}
+
 	app.init_server()
+	spawn commander(mut &app)
 	vweb.run(app, port)
+}
+
+fn commander(mut app &App) {
+	mut r := readline.Readline{}
+	for {
+		answer := r.read_line('>>> ') or {""}
+
+		match answer {
+			"reload" {
+				lock app.posts {
+					app.posts = get_posts()
+				}
+			}
+			"quit" {
+				exit(0)
+			}
+			"" {
+				
+			}
+			else {
+				println("unknown command")
+			}
+		}
+
+	}
 }
 
 fn cmd_new(cmd cli.Command) ! {
 	title := cmd.args[0]
-	write_post(title, [])
+	write_post(title, ...cmd.args[1..])
 	return
 }
 
@@ -389,6 +420,7 @@ pub fn (mut app App) notfound() vweb.Result {
 ['/:post']
 pub fn (mut app App) post(name string) vweb.Result {
 	post := app.find_post_by_name(name) or {
+		println("not found post ${name}")
 		app.redirect('/notfound')
 		Post{}
 	}

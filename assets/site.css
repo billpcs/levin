@@ -1,6 +1,6 @@
 html {
   font-family: monospace;
-  font-size: 1vw;
+  font-size: 1.2em;
   background:#353535;
   color: #ffffff
 }
@@ -9,19 +9,6 @@ a {
   color: #ffffff;
 }
 
-.post-list-container{
-  min-width: 80%;
-  max-width: 90%;
-  background: #1a1a1a;
-  padding: 4%;
-  border: solid 4px black;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 2em;
-  display: flex;
-  flex-direction: column;
-  row-gap: 1%;
-}
 
 .post-page {
   position: relative;
@@ -47,22 +34,6 @@ a {
   column-count: 1;
 }
 
-
-.post {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 100%;
-  background:#1a1a1a;
-  padding: 2%;
-  border: solid 3px black;
-  text-align: justify;
-  text-justify: inter-word;
-  column-count: 3;
-  column-gap: 5%;
-  column-rule-style: groove;
-  font-family: monospace;
-}
-
 .quoted {
   border: solid 3px white;
   padding: 5%;
@@ -75,14 +46,15 @@ a {
 }
 
 .highlighted {
-  font-weight: bold;
+  padding: 0.5em;
+  padding-left: 1em;
+  border-left: thick double hotpink;
   text-justify: inter-character;
 }
 
 .highlighted:hover {
-  color: #000000;
-  font-weight: lighter;
-  background-color: yellow;
+  color: hotpink;
+  background-color: black;
 }
 
 .time-topic-container {
@@ -96,7 +68,7 @@ a {
 
 .time-topic-container:hover {
   background-color: #353534;
-/*  border-radius: 2% 2% 2% 2%;*/
+  border-radius: 0.5em;
 }
 
 .topic {
@@ -125,19 +97,45 @@ a {
   caret-color: chocolate;
 }
 
+.post-list-container{
+  min-width: 80%;
+  max-width: 90%;
+  background: #1a1a1a;
+  padding: 4%;
+  border: solid 4px black;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 2em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1%;
+}
+
+
+.post {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  background:#1a1a1a;
+  padding: 2%;
+  border: solid 3px black;
+  text-align: justify;
+  text-justify: inter-word;
+  column-count: 3;
+  column-gap: 5%;
+  column-rule-style: groove;
+  font-family: monospace;
+}
+
 @media screen and (max-width: 992px) {
   .post-list-container {
     min-width: 10%;
-    max-width: 100%; 
-  }
-
-  .post-list-item {
-    height: 9em;
-    margin-top: 3em;
-    margin-bottom: 3em;
+    max-width: 100%;
+    font-size: 3em;
   }
 
   .post {
     column-count: 1;
+    font-size: 3em;
   }
 }
