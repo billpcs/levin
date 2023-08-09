@@ -8,12 +8,13 @@ const (
 	port       = 8082
 	app_name   = 'levin'
 	posts_path = './posts/'
+	default_loglevel = log.Level.debug
 	log_file_path = os.expand_tilde_to_home('~/.cache/levin.log')
 )
 
 struct App {
 	vweb.Context
-mut:
+pub mut:
 	posts    shared []Post
 	commands cli.Command
 	start_time time.Time

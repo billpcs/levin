@@ -34,6 +34,13 @@ fn cmd_base() cli.Command {
 	}
 }
 
+fn cmd_print_startup_info(mut app &App) {
+	hash := md5.hexhash(app.str())[0..8]
+	app.info("server started (hash ${hash})")
+	app.info("logfile: '${log_file_path}'")
+	app.info("loglevel: ${default_loglevel}")
+}
+
 fn cmd_start(cmd cli.Command) ! {
 
 	log_file := os.open_append(log_file_path) or {
@@ -44,7 +51,7 @@ fn cmd_start(cmd cli.Command) ! {
 	mut app := App{
 		posts: get_posts()
 		logger: log.Log {
-			level: log.Level.debug
+			level: default_loglevel
 			ofile: log_file
 			output_target: log.LogTarget.file
 		}
@@ -53,8 +60,9 @@ fn cmd_start(cmd cli.Command) ! {
 
 	app.init_server()
 	spawn vweb.run(&app, port)
-	hash := md5.hexhash(app.str())[0..8]
-	app.info("server has started (hash ${hash})")
+
+	cmd_print_startup_info(mut &app)
+	
 
 	// start REPL after a while	
 	time.sleep(time.second)
