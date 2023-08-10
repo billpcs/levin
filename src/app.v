@@ -54,8 +54,8 @@ fn (mut app App) fatal(str string) {
 }
 
 fn (mut app App) init_server() {
-	app.mount_static_folder_at(os.resource_abs_path('../assets'), '/assets')
-	app.mount_static_folder_at(os.resource_abs_path('../img'), '/img')
+	app.mount_static_folder_at(os.resource_abs_path('./assets'), '/assets')
+	app.mount_static_folder_at(os.resource_abs_path('./img'), '/img')
 }
 
 
