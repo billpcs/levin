@@ -1,6 +1,5 @@
 import time
 import readline
-import math
 import log
 
 fn show_db() {
@@ -58,28 +57,36 @@ fn handle_loglevel(mut app &App, args ...string) {
 
 }
 
+fn build_str_rec(elapsed time.Duration, str string) string {
+	if elapsed.seconds() <= 60 {
+		nstr := "${elapsed.seconds():.0} secs"
+		return str + " " + nstr
+	}
+	else if elapsed.minutes() <= 60 {
+		mins := i64(elapsed.minutes())
+		rem := elapsed - mins * time.minute
+		nstr := "${mins} mins"
+		return build_str_rec(rem, str + " " + nstr)
+	}
+	else if elapsed.hours() <= 24 {
+		hours := i64(elapsed.hours())
+		rem := elapsed - hours * time.hour
+		nstr := "${hours} hours"
+		return build_str_rec(rem, str + " " + nstr)
+	}
+	else {
+		days := i64(elapsed.days())
+		rem := elapsed - days * time.hour * 24
+		nstr := "${days} days"
+		return build_str_rec(rem, str + " " + nstr)
+	}
+}
+
 fn show_uptime(mut app &App) {
 	now := time.now()
 	elapsed := now - app.start_time
 
-	str := if elapsed.minutes() < 1 {
-		"uptime: ${elapsed.seconds():.0} sec"
-	}
-	else if elapsed.minutes() < 60 {
-		mins := elapsed.seconds() / 60
-		secs := math.fmod(elapsed.seconds(), 60)
-		"uptime: ${mins:.0} min, ${secs:.0} sec"
-	}
-	else if elapsed.hours() < 24 {
-		hours := elapsed.minutes() / 60
-		mins := math.fmod(elapsed.minutes(), 60)
-		"uptime: ${hours:.0} h, ${mins:.0} min"
-	}
-	else {
-		days := elapsed.hours() / 24
-		hours := math.fmod(elapsed.hours(), 24)
-		"uptime: ${days:.0} days, ${hours:.0} h"
-	}
+	str := "${build_str_rec(elapsed, "uptime:")}"
 
 	println(str)
 	app.debug(str)
