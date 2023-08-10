@@ -86,6 +86,7 @@ pub fn (mut app App) post(name string) vweb.Result {
 	}
 	app.debug("user '${app.ip()}' accessed post '${name}'")
 	post_title := post.title
+	post_url := post.url
 	chunks := post.text
 	return $vweb.html()
 }

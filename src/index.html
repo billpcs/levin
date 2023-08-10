@@ -1,41 +1,33 @@
 <!DOCTYPE html>
-
 <html>
-
-<head>
-  @css 'assets/site.css'
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@app_name</title>
-</head>
-
-
-<body>
-
-<div class=top-bar>
-  <div class="top-bar-element">
-    <a href="/">> home </a>
-  </div>
-  <div class="top-bar-element">
-    <a href="/about">> about this </a>
-  </div>
-</div>
-
-</br>
-</br>
-
-<div class=post-list-container>
-  @for post in app.posts
-    <div class=time-topic-container>
-      <div class=time> @post.time</div>
-      <div class=topic>
-        <a href=@post.url> &#x270E; @post.title</a> 
+  <head>
+    @css 'assets/site.css'
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <header>
+    <title>@app_name</title>
+  </header>
+  <body>
+    <div class=top-bar>
+      <div class="top-bar-element">
+        <a href="/">> home </a>
+      </div>
+      <div class="top-bar-element">
+        <a href="/about">> about this </a>
       </div>
     </div>
-  @end
-</div>
-
-
-</body>
-
+    </br>
+    </br>
+    <div class=post-list-container>
+      @for post in app.posts
+      <div class=time-topic-container>
+        <div class=time> @post.time</div>
+        <div class=topic>
+          <a href=@post.url> &#x270E; @post.title</a>
+        </div>
+      </div>
+      @end
+    </div>
+  </body>
 </html>

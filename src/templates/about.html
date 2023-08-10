@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html>
-
-
-<head>
-    @css 'assets/site.css'
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>about</title>
-</head>
-
-
-<body>
-<div>
-    <h1>about</h1>
-
-    <p class=about-text>
-        This site is called 'levin', a handmade static blog built using v and the vweb library.
-    </p>
-
-    <p class=about-text>
-        [1] <a href="https://vlang.io/">https://vlang.io/</a> 
-    </br>
-        [2] <a href="https://modules.vlang.io/vweb.html">https://modules.vlang.io/vweb.html</a> 
-    </p>
-</div>
-</body>
-
-
+    <head>
+        @css 'assets/site.css'
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <header>
+        <title>@app_name/about</title>
+    </header>
+    <body>
+        <div class=top-bar>
+            <div class="top-bar-element">
+                <a href="/">> home </a>
+            </div>
+            <div class="top-bar-element">
+                <a href="/about">> about this </a>
+            </div>
+        </div>
+        
+        <div>
+            <h1>about</h1>
+            <p class=about-text>
+                This site is called 'levin', a handmade static blog built using v and the vweb library.
+            </p>
+            <p class=about-text>
+                [1] <a href="https://vlang.io/">https://vlang.io/</a>
+                </br>
+                [2] <a href="https://modules.vlang.io/vweb.html">https://modules.vlang.io/vweb.html</a>
+            </p>
+        </div>
+    </body>
 </html>
-
-
-
-
-
-
