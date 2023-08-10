@@ -9,6 +9,10 @@ a {
   color: #ffffff;
 }
 
+img {
+  width: 100%;
+}
+
 
 .post-page {
   position: relative;

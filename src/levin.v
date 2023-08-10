@@ -7,7 +7,7 @@ import log
 const (
 	port       = 8082
 	app_name   = 'levin'
-	posts_path = './posts/'
+	posts_path = '../posts/'
 	default_loglevel = log.Level.debug
 	log_file_path = os.expand_tilde_to_home('~/.cache/levin.log')
 )
