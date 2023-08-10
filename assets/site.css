@@ -1,3 +1,9 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+}
+
 html {
   font-family: monospace;
   font-size: 1.2em;
@@ -11,6 +17,16 @@ a {
 
 img {
   width: 100%;
+}
+
+li {
+  padding: 5px;
+  padding-left: 1ch;
+}
+
+ul li::marker {
+  color: hotpink;
+  content: "▶"; 
 }
 
 
@@ -116,6 +132,11 @@ img {
   row-gap: 1%;
 }
 
+.tags {
+  color: lightgreen;
+  margin: 1em;
+}
+
 
 .post {
   margin-left: auto;
@@ -144,5 +165,9 @@ img {
 
   .top-bar {
     font-size: 1.5em;
+  }
+
+  .tags {
+    font-size: 1.8em;
   }
 }

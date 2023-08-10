@@ -56,6 +56,9 @@ fn cmd_start(cmd cli.Command) ! {
 			output_target: log.LogTarget.file
 		}
 		start_time: time.now()
+		tags: Tags {
+			cached: false
+		}
 	}
 
 	app.init_server()

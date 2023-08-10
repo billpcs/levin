@@ -3,10 +3,13 @@ import json
 struct Post {
 mut:
 	title string
+	tags  []Tag
 	time  string
 	text  []Chunk
 	url   string
 }
+
+type Tag = string
 
 
 fn (p Post) header() string {

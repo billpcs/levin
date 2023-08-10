@@ -1,7 +1,4 @@
 import os
-import vweb
-import cli
-import time
 import log
 
 const (
@@ -12,14 +9,6 @@ const (
 	log_file_path = os.expand_tilde_to_home('~/.cache/levin.log')
 )
 
-struct App {
-	vweb.Context
-pub mut:
-	posts    shared []Post
-	commands cli.Command
-	start_time time.Time
-	logger	shared log.Log
-}
 
 fn main() {
 	mut commands := cmd_base()

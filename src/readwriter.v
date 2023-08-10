@@ -23,13 +23,13 @@ fn write_post(title string, contents ...string) {
 	mut str_data := ""
 
 	str_data += post.header()
-	str_data += "\n\n"
+	str_data += "\n---\n\n"
 
 	for line in contents {
 		str_data += line 
 	}
 
-	os.write_file(path, str_data) or { println('failed to write post header') }
+	os.write_file(path, str_data) or { println('failed to write post') }
 
 	println("created new post '${title}'")
 }
@@ -57,19 +57,30 @@ fn read_post(path string) !Post {
 	// to ensure uniqueness
 	url := os.file_name(path)
 
-	// first line must always be the metadata
-	metadata := json.decode(Post, content[0])!
-
-	mut post_text := []string{}
-	for line in content[1..].filter(it != '') {
-		post_text << line
+	/* 
+		read until the first '---' which
+		seperates medatata and post contenets
+	*/
+	mut metadata_str := ""
+	mut metadata_end_idx := 0
+	for i := 0; i < content.len; i += 1 {
+		if content[i].starts_with('---') {
+			metadata_end_idx = i
+			break
+		}
+		metadata_str += content[i]
 	}
+
+	metadata := json.decode(Post, metadata_str)!
+
+	post_text := content[metadata_end_idx+1..].filter(it != '')
 
 	post_chunked_text := parse_post_text(post_text)
 
 	return Post{
 		title: metadata.title
 		time: metadata.time
+		tags: metadata.tags
 		url: url
 		text: post_chunked_text
 	}

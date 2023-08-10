@@ -16,11 +16,19 @@
                     <a href="/">> home </a>
                 </div>
                 <div class="top-bar-element">
+                    <a href="/tags">> tags </a>
+                </div>
+                <div class="top-bar-element">
                     <a href="/about">> about this </a>
                 </div>
             </div>
             <div class=post-container>
                 <h1 class=post-title>@post_title</h1>
+                <div class=tags>
+                    @for tag in tags
+                    <a href="/tags"># @tag</a>
+                    @end
+                </div>
                 <div class=post>
                     @for chunk in chunks
                     @if chunk.is_h()

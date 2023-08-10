@@ -15,6 +15,10 @@ fn reaload_posts(mut app &App) {
 	lock app.posts {
 		app.posts = posts
 	}
+	lock app.tags {
+		// force recompute of tags
+		app.tags.cached = false
+	}
 	app.info("posts were reloaded (${posts.len} in db)")
 }
 
