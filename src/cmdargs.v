@@ -18,6 +18,13 @@ fn cmd_base() cli.Command {
 				name: 'start'
 				description: 'start serving the web page'
 				execute: cmd_start
+				flags: [
+					cli.Flag{
+						flag: .bool
+						name: "deamon"
+						abbrev: 'd'
+					}
+				]
 			},
 			cli.Command{
 				name: 'new'
@@ -62,14 +69,19 @@ fn cmd_start(cmd cli.Command) ! {
 	}
 
 	app.init_server()
-	spawn vweb.run(&app, port)
 
-	cmd_print_startup_info(mut &app)
-	
+	deamon := cmd.flags.get_bool('deamon')!
 
-	// start REPL after a while	
-	time.sleep(time.second)
-	commander(mut &app)
+	if !deamon {
+		spawn vweb.run(&app, port)
+		cmd_print_startup_info(mut &app)
+		// start REPL after a while
+		time.sleep(time.second)
+		commander(mut &app)
+	} else {
+		vweb.run(&app, port)
+	}
+
 }
 
 fn cmd_new(cmd cli.Command) ! {
