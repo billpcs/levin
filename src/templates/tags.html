@@ -10,5 +10,17 @@
         <title>tags</title>
     </header>
     <body>
+        <ul>
+            @for tag in tags.keys()
+            <li>@tag</li>
+                <ul>
+                    @for link in tags[tag]
+                    <ul>
+                        <a href="@link"># @link </a>
+                    </ul>
+                    @end
+                </ul>
+            @end
+        </ul>
     </body>
 </html>

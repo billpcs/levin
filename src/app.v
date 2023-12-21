@@ -122,6 +122,7 @@ pub fn (mut app App) notfound() vweb.Result {
 
 @['/tags']
 pub fn (mut app App) tags() vweb.Result {
+	tags := app.get_all_tags()
 	return $vweb.html()
 }
 
