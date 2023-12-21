@@ -2,25 +2,35 @@
 <html>
     <head>
         @css 'assets/site.css'
-        <meta charset="utf-8"/>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="assets/prism.css">
     </head>
     <header>
-        <title>tags</title>
+        <title>@app_name/about</title>
     </header>
     <body>
+        <div class=top-bar>
+            <div class="top-bar-element">
+                <a href="/">> home </a>
+            </div>
+            <div class="top-bar-element">
+                <a href="/tags">> tags </a>
+            </div>
+            <div class="top-bar-element">
+                <a href="/about">> about this </a>
+            </div>
+        </div>
         <ul>
-            @for tag in tags.keys()
-            <li>@tag</li>
+            <div class="tags">
+                @for tag, posts in tags
+                <li><a href=""># @tag </a></li>
                 <ul>
-                    @for link in tags[tag]
-                    <ul>
-                        <a href="@link"># @link </a>
-                    </ul>
+                    @for post in posts
+                    <li><a href="/@post"> @post </a></li>
                     @end
                 </ul>
-            @end
+                @end
+            </div>
         </ul>
     </body>
 </html>
