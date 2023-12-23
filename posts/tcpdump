@@ -1,0 +1,114 @@
+{ "title": "I don't want to write a program", "time": "2020-10-27 18:00:00", "tags": ["bash"] }
+
+It was one of those times, I did not want to write a program to parse another program's output. I was alright Googling around for _bash_ stuff for 10 minutes or so. Here is what I came up with.
+
+
+But first, the problem. Without explaining the _why_, here is _what_ I wanted to do. I wanted to transform a certain part of the output of _tcpdump_ into a raw byte string. In other words, this:
+
+@# language-bash
+$ tcpdump -xx -r input.pcap 
+reading from file input.pcap, link-type EN10MB (Ethernet)
+22:51:51.000000 08:00:27:2a:09:13 (oui Unknown) > 08:00:27:4c:27:11 (oui Unknown), ethertype 802.1Q (0x8100), length 666: 
+        0x0000:  0800 274c 2711 0800 272a 0913 8100 0641
+        0x0010:  2345 6789 1000 0000 0000 0000 0000 0000
+(... more zero stuff ...)
+@# end
+
+to this
+
+@# language-bash
+$ tcpdump -xx -r input.pcap 
+81000641234567891000
+@# end
+
+In summary, I wanted to drop the first two lines, the space characters, the hex address indicators, the two MAC addresses of the Ethernet header and keep data up to a certain configurable point. So I started hacking together a bash pipeline of pipes.
+
+
+## First, let's remove the address parts on the left.
+
+To do this I used the very nice `cut` utility, that specializes in cutting parts off the lines supplied to it. I thought of using the ":" character as a delimeter for each line. This means that each line will be split at the ":" and I just have to keep the second part. So here it is:
+
+@# language-bash
+tcpdump -xx -r input.pcap | cut -d":" -f2-
+@# end
+
+output:
+
+@# language-bash
+$ tcpdump -xx -r input.pcap | cut -d":" -f2-
+reading from file input.pcap, link-type EN10MB (Ethernet)
+51:51.000000 08:00:27:2a:09:13 (oui Unknown) > 08:00:27:4c:27:11 (oui Unknown), ethertype 802.1Q (0x8100), length 666: 
+  0800 274c 2711 0800 272a 0913 8100 0641
+  2345 6789 1000 0000 0000 0000 0000 0000
+...
+@# end
+
+Notice that apart from getting rid of the address column, the timestamp at the beginning of the second line got messed up too. But we don't care about that at all.
+
+
+## Then, let's keep only the data lines
+
+For this I just drop the first 2 lines using tail. To do this you tell `tail` which line to start from using the syntax `-n +LINE_NUM`
+
+So, given I want to start from the third (drop 1 and 2), I write:
+
+@# language-bash
+$ tcpdump -xx -r input.pcap | cut -d":" -f2- | tail -n+3
+reading from file input.pcap, link-type EN10MB (Ethernet)
+  2345 6789 1000 0000 0000 0000 0000 0000
+...
+@# end
+
+What happend? The first line is still there, and the first line from our data output is missing. Turns out that the line "reading from file ..." is printed on `stderr` and as a result it is not parsed by tail and friends that normally see only `stdout`
+
+So, let's also redirect stderr ⤑ stdout.
+
+
+@# language-bash
+$ tcpdump -xx -r input.pcap 2>&1 | cut -d":" -f2- | tail -n+3
+  0800 274c 2711 0800 272a 0913 8100 0641
+  2345 6789 1000 0000 0000 0000 0000 0000
+...
+@# end
+
+That's more like it. I could have also redirected stderr to /dev/null and used -n+2 on tail. Same thing!
+
+
+## Remove the spaces please...
+
+You can probably see that the only thing missing is to remove the spaces, i.e " " characters, "\n" characters, "\t" characters and ... "\r" characters. That's easy with an other _GNU coreutils_ friend, `tr`. As easy as `tr -d " \t\n\r"`
+
+So the command now reads like
+
+@# language-bash
+$ tcpdump -xx -r input.pcap 2>&1 | cut -d":" -f2- | tail -n+3 | tr -d " \t\n\r"
+0800274c27110800272a09138100064123456789100000000000000000000000...
+@# end
+
+
+
+## Remove some more chars here and there
+
+And for the final part, let's at least drop the MAC addresses, situated at the beginning of the data.
+
+
+This again is a good place to use cut:
+
+@# language-bash
+$ tcpdump -xx -r input.pcap 2>&1 | cut -d":" -f2- | tail -n+3 | tr -d " \t\n\r" | cut -c25-
+8100064123456789100000000000000000000000...
+@# end
+
+
+## Summary
+
+@# language-bash
+tcpdump -xx -r input.pcap
+tcpdump -xx -r input.pcap | cut -d":" -f2-
+tcpdump -xx -r input.pcap 2>&1 | cut -d":" -f2- | tail -n+3
+tcpdump -xx -r input.pcap 2>&1 | cut -d":" -f2- | tail -n+3 | tr -d " \t\n\r"
+tcpdump -xx -r input.pcap 2>&1 | cut -d":" -f2- | tail -n+3 | tr -d " \t\n\r" | cut -c25-
+@# end
+
+
+And I didn't even have to use `sed`!
