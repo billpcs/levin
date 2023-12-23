@@ -1,4 +1,4 @@
-type Chunk = Header | HHeader | HHHeader | Text | Code | Highlight | Quote
+type Chunk = Header | HHeader | HHHeader | Text | Code | Highlight | Quote | Image
 
 struct Code {
 	metadata string
@@ -11,6 +11,11 @@ struct Highlight {
 }
 
 struct Quote {
+	metadata string
+	text string
+}
+
+struct Image {
 	metadata string
 	text string
 }
@@ -84,6 +89,13 @@ pub fn (c Chunk) is_quote() bool {
 	}
 }
 
+pub fn (c Chunk) is_image() bool {
+	return match c {
+		Image {true}
+		else {false}
+	}
+}
+
 
 fn is_highlight(line string) bool {
 	l := line.split(' ')[0].trim_space()
@@ -109,6 +121,11 @@ fn is_hh(line string) bool {
 
 fn is_h(line string) bool {
 	return is_h_star(line, 1)
+}
+
+fn is_image(line string) bool {
+	l := line.split(' ')[0].trim_space()
+	return l.starts_with('@!')
 }
 
 fn is_other(line string) bool {
@@ -159,6 +176,11 @@ fn parse_post_text(text []string) []Chunk {
 		else if is_quote(line) {
 			chunked << Quote {
 				text: line.all_after("> ")
+			}
+		}
+		else if is_image(line) {
+			chunked << Image {
+				text: line.all_after("@! ")
 			}
 		}
 		else if is_code(line) {

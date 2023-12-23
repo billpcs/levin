@@ -40,6 +40,9 @@
                     @if chunk.is_hhh()
                     <h3>@chunk.text</h3>
                     @end
+                    @if chunk.is_image()
+                    <img src=@chunk.text>
+                    @end
                     @if chunk.is_highlight()
                     <p class="highlighted">
                         @chunk.text
