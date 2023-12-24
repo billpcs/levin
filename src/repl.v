@@ -11,7 +11,7 @@ fn show_db() {
 	}
 }
 
-fn reaload_posts(mut app App) {
+fn reload_posts(mut app App) {
 	posts := get_posts()
 	lock app.posts {
 		app.posts = posts
@@ -130,7 +130,7 @@ fn commander(mut app App) {
 				show_help()
 			}
 			'reload', 'r' {
-				reaload_posts(mut app)
+				reload_posts(mut app)
 				reload_rss(mut app) or { app.info('could not load rss') }
 			}
 			'databse', 'db', 'd' {
