@@ -71,6 +71,9 @@ fn cmd_start(cmd cli.Command) ! {
 
 	deamon := cmd.flags.get_bool('deamon')!
 
+	// generate rss.xml at startup
+	generate_rss(mut app)!
+
 	if !deamon {
 		spawn vweb.run(&app, port)
 		cmd_print_startup_info(mut &app)

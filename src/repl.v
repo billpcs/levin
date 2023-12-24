@@ -23,7 +23,7 @@ fn reload_posts(mut app App) {
 	app.info('posts were reloaded (${posts.len} in db)')
 }
 
-fn reload_rss(mut app App) ! {
+fn generate_rss(mut app App) ! {
 	rss := app.get_rss(true)
 	mut file := os.open_file(rss_file, 'w')!
 	n_bytes := file.writeln(rss.to_string()) or { 0 }
@@ -131,7 +131,7 @@ fn commander(mut app App) {
 			}
 			'reload', 'r' {
 				reload_posts(mut app)
-				reload_rss(mut app) or { app.info('could not load rss') }
+				generate_rss(mut app) or { app.info('could not load rss') }
 			}
 			'databse', 'db', 'd' {
 				show_db()
