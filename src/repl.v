@@ -1,3 +1,4 @@
+import os
 import time
 import readline
 import log
@@ -20,6 +21,19 @@ fn reaload_posts(mut app &App) {
 		app.tags.cached = false
 	}
 	app.info("posts were reloaded (${posts.len} in db)")
+}
+
+fn reload_rss(mut app &App) ! {
+	rss := app.get_rss(true)
+	mut file := os.open_file(rss_file, 'w')!
+	n_bytes := file.writeln(rss.to_string()) or {0}
+	if n_bytes == 0 {
+		app.error('rss: could not write to ${rss_file}')
+	}
+	else {
+		app.info("rss file was rewritten")
+	}
+	file.close()
 }
 
 fn set_log_level(mut app &App, l log.Level) {
@@ -123,7 +137,10 @@ fn commander(mut app &App) {
 				show_help()
 			}
 			"reload", "r" {
-				reaload_posts(mut app)	
+				reaload_posts(mut app)
+				reload_rss(mut app) or {
+					app.info('could not load rss')
+				}
 			}
 			"databse", "db", "d" {
 				show_db()

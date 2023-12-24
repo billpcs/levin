@@ -24,3 +24,12 @@ fn (p Post) json() string {
 fn (p Post) to_string() string {
 	return "${p.url} @ [${p.time}] - \"${p.title}\""
 }
+
+fn (p Post) to_rss_item() RssItem {
+	return RssItem {
+		title: p.title
+		link: domain + p.url
+		description: p.tags.str()
+		pub_date: to_rfc822(p.time) or {''}
+	}
+}

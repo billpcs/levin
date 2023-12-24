@@ -18,6 +18,7 @@ mut:
 	start_time time.Time
 	logger	shared log.Log
 	tags 	shared Tags
+	rss	shared Rss
 }
 
 fn (mut app App) find_post_by_name(url string) !Post {
@@ -45,6 +46,22 @@ fn (mut app App) force_recompute_tags() map[string][]string {
 	return m
 }
 
+
+fn (mut app App) force_recompute_rss() RssChannel {
+	mut items := []RssItem{}
+	lock app.posts {
+		for post in app.posts {
+			items << post.to_rss_item()
+		}
+	}
+	return RssChannel {
+		title: rss_title
+		link: domain
+		description: rss_description
+		items: items
+	}
+}
+
 fn (mut app App) get_all_tags() map[string][]string {
 	lock app.tags {
 		if app.tags.cached {
@@ -57,6 +74,23 @@ fn (mut app App) get_all_tags() map[string][]string {
 			return app.tags.list
 		}
 	}
+}
+
+fn (mut app App) get_rss(force_reload bool) Rss {
+	lock app.rss {
+		if app.rss.cached && !force_reload {
+			app.info("rss requested, returning cached version")
+		} else {
+			app.info("rss requested, recomputing and caching")
+			app.rss = Rss {
+				version: rss_version
+				cached: true
+				channel: app.force_recompute_rss()
+			}
+		}
+	}
+	rss := app.rss
+	return rss
 }
 
 fn (mut app App) get_log_level() log.Level {
@@ -100,6 +134,7 @@ fn (mut app App) fatal(str string) {
 }
 
 fn (mut app App) init_server() {
+	app.serve_static('/rss.xml', rss_file)
 	app.serve_static('/favicon.ico', './assets/favicon.ico')
 	app.mount_static_folder_at(os.resource_abs_path('./assets'), '/assets')
 	app.mount_static_folder_at(os.resource_abs_path('./img'), '/img')

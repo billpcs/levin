@@ -1,6 +1,14 @@
+const (
+	rss_version = '2.0'
+	rss_title = 'Levin Blog by billpcs'
+	rss_description = 'technology and my thoughts'
+	rss_file = './assets/rss.xml'
+)
+
 struct Rss {
 	version string
 	channel RssChannel
+	cached bool
 }
 
 struct RssChannel {
@@ -63,10 +71,6 @@ fn (r Rss) to_string() string {
 	return res
 }
 
-
-
-
-
 fn rss_test() {
 
 	rss := Rss {
@@ -87,8 +91,6 @@ fn rss_test() {
 	}
 
 	println(rss.to_string())
-
-
 }
 
 
