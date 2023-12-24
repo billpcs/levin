@@ -7,18 +7,18 @@ import time
 struct Tags {
 mut:
 	cached bool
-	list map[string][]string
+	list   map[string][]string
 }
 
 struct App {
 	vweb.Context
 mut:
-	posts    shared []Post
-	commands cli.Command
+	posts      shared []Post
+	commands   cli.Command
 	start_time time.Time
-	logger	shared log.Log
-	tags 	shared Tags
-	rss	shared Rss
+	logger     shared log.Log
+	tags       shared Tags
+	rss        shared Rss
 }
 
 fn (mut app App) find_post_by_name(url string) !Post {
@@ -46,7 +46,6 @@ fn (mut app App) force_recompute_tags() map[string][]string {
 	return m
 }
 
-
 fn (mut app App) force_recompute_rss() RssChannel {
 	mut items := []RssItem{}
 	lock app.posts {
@@ -54,7 +53,7 @@ fn (mut app App) force_recompute_rss() RssChannel {
 			items << post.to_rss_item()
 		}
 	}
-	return RssChannel {
+	return RssChannel{
 		title: rss_title
 		link: domain
 		description: rss_description
@@ -65,10 +64,10 @@ fn (mut app App) force_recompute_rss() RssChannel {
 fn (mut app App) get_all_tags() map[string][]string {
 	lock app.tags {
 		if app.tags.cached {
-			app.info("tags requested, they were cached")
+			app.info('tags requested, they were cached')
 			return app.tags.list
 		} else {
-			app.info("tags requested, recomputed and cached")
+			app.info('tags requested, recomputed and cached')
 			app.tags.list = app.force_recompute_tags()
 			app.tags.cached = true
 			return app.tags.list
@@ -79,10 +78,10 @@ fn (mut app App) get_all_tags() map[string][]string {
 fn (mut app App) get_rss(force_reload bool) Rss {
 	lock app.rss {
 		if app.rss.cached && !force_reload {
-			app.info("rss requested, returning cached version")
+			app.info('rss requested, returning cached version')
 		} else {
-			app.info("rss requested, recomputing and caching")
-			app.rss = Rss {
+			app.info('rss requested, recomputing and caching')
+			app.rss = Rss{
 				version: rss_version
 				cached: true
 				channel: app.force_recompute_rss()

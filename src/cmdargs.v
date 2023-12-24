@@ -21,9 +21,9 @@ fn cmd_base() cli.Command {
 				flags: [
 					cli.Flag{
 						flag: .bool
-						name: "deamon"
+						name: 'deamon'
 						abbrev: 'd'
-					}
+					},
 				]
 			},
 			cli.Command{
@@ -41,29 +41,28 @@ fn cmd_base() cli.Command {
 	}
 }
 
-fn cmd_print_startup_info(mut app &App) {
+fn cmd_print_startup_info(mut app App) {
 	hash := md5.hexhash(app.str())[0..8]
-	app.info("server started (hash ${hash})")
+	app.info('server started (hash ${hash})')
 	app.info("logfile: '${log_file_path}'")
-	app.info("loglevel: ${default_loglevel}")
+	app.info('loglevel: ${default_loglevel}')
 }
 
 fn cmd_start(cmd cli.Command) ! {
-
 	log_file := os.open_append(log_file_path) or {
-		println("failed to open logfile, writing to stdout")
+		println('failed to open logfile, writing to stdout')
 		os.stdout()
 	}
 
 	mut app := App{
 		posts: get_posts()
-		logger: log.Log {
+		logger: log.Log{
 			level: default_loglevel
 			ofile: log_file
 			output_target: log.LogTarget.file
 		}
 		start_time: time.now()
-		tags: Tags {
+		tags: Tags{
 			cached: false
 		}
 	}
@@ -81,7 +80,6 @@ fn cmd_start(cmd cli.Command) ! {
 	} else {
 		vweb.run(&app, port)
 	}
-
 }
 
 fn cmd_new(cmd cli.Command) ! {

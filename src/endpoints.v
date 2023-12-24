@@ -29,9 +29,7 @@ pub fn (mut app App) tags() vweb.Result {
 
 @['/:post']
 pub fn (mut app App) post(name string) vweb.Result {
-	post := app.find_post_by_name(name) or {
-		return app.notfound()
-	}
+	post := app.find_post_by_name(name) or { return app.notfound() }
 	app.debug("user '${app.ip()}' accessed post '${name}'")
 	post_title := post.title
 	post_url := post.url

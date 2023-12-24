@@ -10,7 +10,7 @@ fn get_posts() []Post {
 
 fn write_post(title string, contents ...string) {
 	timeval := time.now().str()
-	file_name := title.to_lower().replace(" ", "-")
+	file_name := title.to_lower().replace(' ', '-')
 
 	post := Post{
 		title: title
@@ -20,13 +20,13 @@ fn write_post(title string, contents ...string) {
 
 	path := '${posts_path}${file_name}'
 
-	mut str_data := ""
+	mut str_data := ''
 
 	str_data += post.header()
-	str_data += "\n---\n\n"
+	str_data += '\n---\n\n'
 
 	for line in contents {
-		str_data += line 
+		str_data += line
 	}
 
 	os.write_file(path, str_data) or { println('failed to write post') }
@@ -57,11 +57,11 @@ fn read_post(path string) !Post {
 	// to ensure uniqueness
 	url := os.file_name(path)
 
-	/* 
+	/*
 		read until the first '---' which
 		seperates medatata and post contenets
 	*/
-	mut metadata_str := ""
+	mut metadata_str := ''
 	mut metadata_end_idx := 0
 	for i := 0; i < content.len; i += 1 {
 		if content[i].starts_with('---') {
@@ -73,7 +73,7 @@ fn read_post(path string) !Post {
 
 	metadata := json.decode(Post, metadata_str)!
 
-	post_text := content[metadata_end_idx+1..].filter(it != '')
+	post_text := content[metadata_end_idx + 1..].filter(it != '')
 
 	post_chunked_text := parse_post_text(post_text)
 
