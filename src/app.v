@@ -7,7 +7,7 @@ import time
 struct Tags {
 mut:
 	cached bool
-	list   map[string][]string
+	list   map[string][]Post
 }
 
 struct App {
@@ -32,13 +32,13 @@ fn (mut app App) find_post_by_name(url string) !Post {
 	return error('could not find this post')
 }
 
-fn (mut app App) force_recompute_tags() map[string][]string {
-	mut m := map[string][]string{}
+fn (mut app App) force_recompute_tags() map[string][]Post {
+	mut m := map[string][]Post{}
 
 	lock app.posts {
 		for post in app.posts {
 			for tag in post.tags {
-				m[tag] << post.url
+				m[tag] << post
 			}
 		}
 	}
@@ -61,7 +61,7 @@ fn (mut app App) force_recompute_rss() RssChannel {
 	}
 }
 
-fn (mut app App) get_all_tags() map[string][]string {
+fn (mut app App) get_all_tags() map[string][]Post {
 	lock app.tags {
 		if app.tags.cached {
 			app.info('tags requested, they were cached')
