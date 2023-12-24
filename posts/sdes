@@ -7,11 +7,11 @@
 _(I intended for this blog post to be a full explanation of my SDES implementation, but it got too long too fast. Therefore, in this post I focused mostly on the binary number representation and didn't analyze other topics such as the test suite and the class hierarchies, topics that I will maybe address in a future post --probably never)_
 
 
-### Intro
+# Intro
 DES is a symmetric algorithm for encrypting data. Simplified DES or SDES, as I will refer to it from now on, is a simple version of DES, which is used to familiarize the students with the inner workings of the algorithm without getting too involved with details. I happened to implement it for a semester course project and below are some of my thoughts.
 
 
-### What I wanted to do differently
+# What I wanted to do differently
 
 One of the first things I had to consider was how the binary numbers were going to be dealt with internally. Programming languages don't usually have variable types for "Bit". The variable type with the smallest amount of memory you can generally get is a Byte. SDES uses binary numbers of three sizes: **4**, **8** and **10 bit** numbers.
 
@@ -37,10 +37,10 @@ The _xor_ function `^` is in reality a bitwise operator and because the array co
 Notice that the running time of the above function is linear and depends on length of the array, i.e the number of bits, as we have to pass through the whole array and `xor` the elements one by one. This is another reason I don't like this solution.
 
 
-### My Solution
+# My Solution
 So, after noting these two problems, I started thinking about a different solution. In order for `xor` operations to execute in almost constant time, we could have **the whole binary number saved in a Short integer**. In this way the operation can be done in one go. With a single `^` we can have the result of what previously we created a O(n) function for. A `Short` can be 16 bits, which means we can save the 4, 8 and 10 bit numbers we need, in a single _Short_. With this approach we kill two birds with one stone, as we also solve the problem of using too much memory. Let's see why.
 
-#### Memory
+## Memory
 For starters, let's examine the impact on the memory usage for storing a 4bit number in these two cases.
 
 In the case of the `Array[Byte]` we would have 4 elements, each with a size of a `Byte` meaning 4*8 = 32 bits.
@@ -51,7 +51,7 @@ In the case of 10bit numbers, the first way yields _80 bits_ and the second stay
 
 With some [quick maths](https://www.youtube.com/watch?v=X09oxyIeGuY), for the worst case we get 50% less memory usage and for the best case 80% less memory usage.
 
-##### Speed
+## Speed
 For bitwise operations we should get a ~4x to 10x speedup (depending on which binary size is the mean). But not everything in the algorithm is about bitwise operations so this figure should be much much lower when executing a whole cycle of the algorithm.
 
 After running some benchmarks, using [Scalameter](https://scalameter.github.io/), it turns out that the second approach gives a **~2x speedup**. Before seeing how this number came out to be, we should first take closer a look at some key elements of my implementation and then contrast it with how this would change for the "array way" of looking at binary numbers.
@@ -59,7 +59,7 @@ After running some benchmarks, using [Scalameter](https://scalameter.github.io/)
 For simplicity, we are going to consider the 4 bit case.The other two cases (8 and 10 bit) are almost the same, having only minor differences.
 
 
-##### Bit4
+## Bit4
 
 I decided to call the class which is going to contain the information for a 4 bit number `Bit4`. So let's start with a constructor.
 
@@ -78,7 +78,7 @@ class Bit4(val v: Short) {
 
 But this is wrong! We only want the 4 LSB of the value `v` to be accounted for in the result. By doing this we get values greater than the range a 4 bit number could have. Since numbers are represented in `two's complement` format, the range for 4 bits should be [-8 to 7]. So, how can we solve this problem?
 
-##### Bit masks to the rescue!
+## Bit masks to the rescue!
 
 I really don't know if there is a better way, but here is what I did.
 
@@ -154,7 +154,7 @@ BinaryNum is just a base trait for all the classes (Bit4, Bit8 and Bit10).
 
 That's all.
 
-#### The benchmark
+## The benchmark
 
 I wanted to see if my reasoning for choosing this method was correct and there was indeed a remarkable performance penalty when using arrays to represent binary numbers.
 
