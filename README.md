@@ -4,7 +4,7 @@
 
 This is a static blog and server that uses [v](https://vlang.io/)
 
-Also, it runs here http://blog.revithi.space
+Also, it runs here http://revithi.space
 
 # quick start
 
