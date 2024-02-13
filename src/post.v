@@ -41,10 +41,10 @@ fn (p Post) get_item_descr_by_tags() string {
 			}
 			str += 'and ${p.tags[p.tags.len-1]}.\n'
 		}
-	}
 
-	str += p.text.map(it.text).join(' ')[..200]
-	str += '...'
+		str += p.text.map(it.text).join(' ')[..200]
+		str += '...'
+	}
 
 	return str
 }
