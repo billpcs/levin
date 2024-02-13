@@ -164,6 +164,7 @@ ul li::marker {
 @media screen and (max-width: 992px) {
   .post-list-container {
     font-size: 1.2em;
+    max-width: 90%;
   }
 
   .post {
