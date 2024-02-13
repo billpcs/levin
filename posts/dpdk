@@ -386,10 +386,10 @@ Now that we know how to get hold of the packets, let's start editing.
 
 For our purposes we don't care if the number of available ports is even or odd. We just need one! The one port that receives the packets. So remove
 
-```c
+@# language-c
 if (nb_ports < 2 || (nb_ports & 1))
         rte_exit(EXIT_FAILURE, "Error: number of ports must be even\n");
-```
+@# end
 
 
 ### Remove: the 'tx_burst'
