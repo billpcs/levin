@@ -37,3 +37,8 @@ pub fn (mut app App) post(name string) vweb.Result {
 	tags := post.tags
 	return $vweb.html()
 }
+
+@['/:other...']
+pub fn (mut app App) catchall(path string) vweb.Result {
+	return app.notfound()
+}
