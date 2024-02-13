@@ -127,8 +127,8 @@ ul li::marker {
 }
 
 .post-list-container{
-  min-width: 80%;
-  max-width: 90%;
+  min-width: 50%;
+  max-width: 60%;
   background: #1a1a1a;
   padding: 4%;
   border: solid 4px black;
