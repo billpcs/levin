@@ -165,7 +165,37 @@ blockquote:hover {
   font-family: monospace;
 }
 
+.toggle-label {
+  border: solid 3px black;
+  display: inline-block;
+  padding: 10px;
+  background-color: #1a1a1a;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+#toggle {
+  display: none; /* Hide checkbox visually */
+}
+
+#toggle + .toggle-label::after {
+    content: "(3)"
+}
+
+#toggle:checked + .toggle-label::after {
+  content: "(1)";
+}
+
+#toggle:checked ~ .post {
+  column-count: 1; /* Column count when toggled */
+}
+
 @media screen and (max-width: 992px) {
+  label[for="toggle"] {
+    display: none;
+  }
+
   .post-list-container {
     font-size: 1.2em;
     max-width: 90%;
