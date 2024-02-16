@@ -1,7 +1,7 @@
 { "title": "The first blog post", "time": "2016-12-16 17:07:17", "tags": ["ip", "scala", "python"] }
 
 
-### Undestanding [***frog***][1] (by doing something else)
+# Undestanding [***frog***][1] (by doing something else)
 
 I will try to write a function to convert a bit-stream (in the form of a string) to its representation as an [IPv4][2] address.
 
@@ -11,12 +11,12 @@ The catch is, the code must be as concise as possible.
 
 Scala can be very concise and yet readable with some nicely written chains of operations. Let's see it in action here:
 
-@# language-scala
+```scala
   def toIp(str: String) =
      str.grouped(8)
         .map(el => Integer.parseInt(el, 2))
         .mkString(".")
-@# end
+```
 
 The `grouped(n)` method is defined for all the members of `scala.collection.IterableLike` which `String` is a member of. But let's not get too involved.
 
@@ -26,43 +26,43 @@ All we have to do then, is map each one to its decimal representation and be don
 
 Now we can just say
 
-@# language-scala
+```scala
   @ toIp("10000000000010100000001000011110")
   res1: String = "128.10.2.30"
-@# end
+```
 
 ## Let's try Python!
 
 The best way I could come up with, without making and import, is this
 
-@# language-python
+```python
   def to_ip(bitstr):
     lst = [bitstr[i:i+8] for i in range(0, len(bitstr), 8)]
     res = [str(int(i, 2)) for i in lst]
     return '.'.join(res)
-@# end
+```
 
 and then you can simply call
 
-@# language-python
+```python
   >>> print(to_ip("10000000000010100000001000011110"))
   128.10.2.30
-@# end
+```
 
 But one would argue that python is no good without the imports. And I agree, so let's try the same thing, but now with the help of an import.
 
-@# language-python
+```python
   import re
   def to_ip2(bitstr):
     return '.'.join([str(int(i, 2)) for i in re.findall('........?', bitstr)])
-@# end
+```
 
 so now we can call it again and get the expected results
 
-@# language-python
+```python
   >>> print(to_ip2("10000000000010100000001000011110"))
   128.10.2.30
-@# end
+```
 
 This is quite concise but it becomes difficult to read.
 

@@ -33,39 +33,7 @@
                     @end
                 </div>
                 <div class=post>
-                    @for chunk in chunks
-                    @if chunk.is_h()
-                    <h1>@chunk.text</h1>
-                    @end
-                    @if chunk.is_hh()
-                    <h2>@chunk.text</h2>
-                    @end
-                    @if chunk.is_hhh()
-                    <h3>@chunk.text</h3>
-                    @end
-                    @if chunk.is_image()
-                    <img src=@chunk.text>
-                    @end
-                    @if chunk.is_highlight()
-                    <p class="highlighted">
-                        @chunk.text
-                    </p>
-                    @end
-                    @if chunk.is_quote()
-                    <blockquote>
-                        <p class="quoted">
-                            @chunk.text
-                        </p>
-                    </blockquote>
-                    
-                    @end
-                    @if chunk.is_code()
-                <pre><code class=@chunk.metadata>@chunk.text</code></pre>
-                @end
-                @if chunk.is_text()
-                <p> @chunk.text </p>
-                @end
-                @end
+                    @post_html
             </div>
         </div>
     </div>

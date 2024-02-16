@@ -23,7 +23,6 @@ fn write_post(title string, contents ...string) {
 	mut str_data := ''
 
 	str_data += post.header()
-	str_data += '\n---\n\n'
 
 	for line in contents {
 		str_data += line
@@ -57,31 +56,23 @@ fn read_post(path string) !Post {
 	// to ensure uniqueness
 	id := os.file_name(path)
 
-	/*
-		read until the first '---' which
-		seperates medatata and post contenets
-	*/
-	mut metadata_str := ''
-	mut metadata_end_idx := 0
-	for i := 0; i < content.len; i += 1 {
-		if content[i].starts_with('---') {
-			metadata_end_idx = i
-			break
-		}
-		metadata_str += content[i]
+	// metadata is ONLY on the first line as JSON
+	metadata := if content.len >= 1 {
+		json.decode(Post, content[0])!
+	}
+	else {
+		return error('no metadata found')
 	}
 
-	metadata := json.decode(Post, metadata_str)!
 
-	post_text := content[metadata_end_idx + 1..].filter(it != '')
-
-	post_chunked_text := parse_post_text(post_text)
+	// the rest is the post
+	post_text := content[1..].join('\n')
 
 	return Post{
 		title: metadata.title
 		time: metadata.time
 		tags: metadata.tags
 		id: id
-		text: post_chunked_text
+		text: post_text
 	}
 }

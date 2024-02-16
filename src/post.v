@@ -5,7 +5,7 @@ mut:
 	title string
 	tags  []string
 	time  string
-	text  []Chunk
+	text  string
 	id   string
 }
 
@@ -45,12 +45,10 @@ fn (p Post) get_item_descr_by_tags() string {
 			}
 			str += 'and ${p.tags[p.tags.len-1]}.\n'
 		}
+		len := p.text.len
+		max_index := if len > 200 { 200 } else { len }
 
-		raw := p.text.map(it.text).join(' ')
-		max_index := if raw.len > 200 { 200 } else { raw.len }
-		println('${p.title} max index: ${max_index}')
-
-		str += p.text.map(it.text).join(' ')[..max_index]
+		str += p.text[..max_index]
 		str += '...'
 	}
 

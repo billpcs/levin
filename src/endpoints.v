@@ -1,4 +1,5 @@
 import vweb
+import markdown
 
 pub fn (mut app App) index() vweb.Result {
 	app.debug("user '${app.ip()}' requested index")
@@ -38,8 +39,8 @@ pub fn (mut app App) post(name string) vweb.Result {
 	app.debug("user '${app.ip()}' accessed post '${name}'")
 	post_title := post.title
 	post_url := post.relative_url()
-	chunks := post.text
 	tags := post.tags
+	post_html := vweb.RawHtml(markdown.to_html(post.text))
 	return $vweb.html()
 }
 

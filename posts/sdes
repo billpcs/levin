@@ -18,13 +18,13 @@ One of the first things I had to consider was how the binary numbers were going 
 What I came across regularly when browsing solutions on SDES was people saving binary numbers as arrays of integers, meaning saving 1's and 0's in an array. I didn't like this approach for various reasons. Firstly, it wastes too much space. This is because, even though we save the information of **one** bit in one array cell, it takes the space of at least 8 bits, if we decide to make it an Array[Byte] (and this is the best we can do in terms of memory with this type). This also means that we have to implement bitwise operations that are used extensively in SDES, from scratch. A _bitwise xor_ for example would probably have to be implemented as presented below:
 
 
-@# language-scala
+```scala
 type Binary = Array[Byte]
 def xor(xs: Binary, ys: Binary): Binary =
     for {
       (a, b) <- (xs zip ys)
     } yield (a ^ b).toByte
-@# end
+```
 
 Let's break up the above function.
 
@@ -52,9 +52,9 @@ In the case of 10bit numbers, the first way yields _80 bits_ and the second stay
 With some [quick maths](https://www.youtube.com/watch?v=X09oxyIeGuY), for the worst case we get 50% less memory usage and for the best case 80% less memory usage.
 
 ## Speed
-For bitwise operations we should get a ~4x to 10x speedup (depending on which binary size is the mean). But not everything in the algorithm is about bitwise operations so this figure should be much much lower when executing a whole cycle of the algorithm.
+For bitwise operations we should get about 4x to 10x speedup (depending on which binary size is the mean). But not everything in the algorithm is about bitwise operations so this figure should be much much lower when executing a whole cycle of the algorithm.
 
-After running some benchmarks, using [Scalameter](https://scalameter.github.io/), it turns out that the second approach gives a **~2x speedup**. Before seeing how this number came out to be, we should first take closer a look at some key elements of my implementation and then contrast it with how this would change for the "array way" of looking at binary numbers.
+After running some benchmarks, using [Scalameter](https://scalameter.github.io/), it turns out that the second approach gives about **2x speedup**. Before seeing how this number came out to be, we should first take closer a look at some key elements of my implementation and then contrast it with how this would change for the "array way" of looking at binary numbers.
 
 For simplicity, we are going to consider the 4 bit case.The other two cases (8 and 10 bit) are almost the same, having only minor differences.
 
@@ -63,18 +63,18 @@ For simplicity, we are going to consider the 4 bit case.The other two cases (8 a
 
 I decided to call the class which is going to contain the information for a 4 bit number `Bit4`. So let's start with a constructor.
 
-@# language-scala
+```scala
 class Bit4(val v: Short)
-@# end
+```
 
 Then, have to implement the `xor` method:
 
-@# language-scala
+```scala
 class Bit4(val v: Short) {
   def |^|(that: Bit4) =
     Bit4((this.v ^ that.v).toShort)
 }
-@# end
+```
 
 But this is wrong! We only want the 4 LSB of the value `v` to be accounted for in the result. By doing this we get values greater than the range a 4 bit number could have. Since numbers are represented in `two's complement` format, the range for 4 bits should be [-8 to 7]. So, how can we solve this problem?
 
@@ -82,7 +82,7 @@ But this is wrong! We only want the 4 LSB of the value `v` to be accounted for i
 
 I really don't know if there is a better way, but here is what I did.
 
-@# language-scala
+```scala
 class Bit4(private val v: Short) {
 
   val value = {
@@ -93,13 +93,13 @@ class Bit4(private val v: Short) {
   def |^|(that: Bit4) =
     Bit4((this.value ^ that.value).toShort)
 }
-@# end
+```
 
 What the above code does is check whether we need to do a sign extension with ones, i.e checks if the MSB is one. If it is, we mask the 4 LSB and sign extend the rest. If it is not, we just mask the 4 LSB. This way, whatever the input value to the constructor, the `value` will always contain a number in the correct range. If the initial element was not in the correct range, then it is a problem of the caller. I have made the decision not to report anything back or throw an exception.
 
 The final code for `Bit4` looks something like this:
 
-@# language-scala
+```scala
 case class Bit8(v: Int) extends BinaryNum {
   def this(s: String) = this(Integer.parseInt(s, 2).toShort)
 
@@ -136,17 +136,17 @@ case class Bit8(v: Int) extends BinaryNum {
     case _ => false
   }
 }
-@# end
+```
 
 I have just made two auxiliary constructors for creating a Bit4 by passing a binary string (e.g Bit4("0010")) or by passing an array of bits. I also made the class a _**case class**_ and added an `apply` method. Without the case class (or a companion object) you would have to write `new Bit4(4)` when creating instances. What Scala allows with case classes is to remove the need for the `new` keyword. We can simply write `Bit4(10)` and create instances throughout the code base. The way the `apply` method is implemented allows for this kind of syntax:
 
-@# language-scala
+```scala
 scala> val num = sdes.Bit4(4)
 num: sdes.Bit4 = 4 (0b0100)
 
 scala> num(2)
 res0: sdes.Bit = 1
-@# end
+```
 
 Because many times, during the execution of the algorithm we need to extract a certain bit out of the binary number, this method allows as to do so easily. For instance, if we want to get the second bit as in the above example (counting from the MSB) we just need to call `num(2)` and we will get `1` as expected. We could have easily made a method called `getBit(n: Int): Bit`, but to me, the usage of apply here makes the Bit4 class a seem more like a list of bits.
 
@@ -160,7 +160,7 @@ I wanted to see if my reasoning for choosing this method was correct and there w
 
 In order to test the performance, I had to make some changes and the main such change was made to the |^| function (the `concat` and `split` functions also needed to be changed, but you can check them out yourself).
 
-@# language-scala
+```scala
 // ....
 
 lazy val bvalue = toBits
@@ -171,12 +171,12 @@ def |^|(that: Bit4): Bit4 =
   })
 
 // ...
-@# end
+```
 
 I ran the following code using Scalameter
 
 
-@# language-scala
+```scala
 import org.scalameter.api._
 
 object RangeBenchmark extends Bench.ForkedTime {
@@ -192,23 +192,23 @@ object RangeBenchmark extends Bench.ForkedTime {
     }
   }
 }
-@# end
+```
 
 The results in milliseconds rounded to the nearest integer are given below:
 
-@# language-scala
+```scala
 // xor with array
 val xor_ar = Array(45, 51, 55, 59, 64, 68, 73, 80, 91, 96, 99)
 
 //xor native
 val xor_nt = Array(20, 26, 28, 30, 32, 34, 36, 39, 41, 43, 45)
-@# end
+```
 
 The average speedup is:
 
-@# language-scala
+```scala
 (xor_ar zip xor_nt).map{ case(a, n) => 1.0*a/n }.sum / xor_ar.length
-@# end
+```
 
 The full source code can be found on my github page: https://github.com/billpcs/sdes
 
