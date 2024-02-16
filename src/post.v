@@ -42,7 +42,11 @@ fn (p Post) get_item_descr_by_tags() string {
 			str += 'and ${p.tags[p.tags.len-1]}.\n'
 		}
 
-		str += p.text.map(it.text).join(' ')[..200]
+		raw := p.text.map(it.text).join(' ')
+		max_index := if raw.len > 200 { 200 } else { raw.len }
+		println('${p.title} max index: ${max_index}')
+
+		str += p.text.map(it.text).join(' ')[..max_index]
 		str += '...'
 	}
 
