@@ -135,6 +135,7 @@ fn (mut app App) fatal(str string) {
 fn (mut app App) init_server() {
 	app.serve_static('/rss.xml', rss_file)
 	app.serve_static('/favicon.ico', './assets/favicon.ico')
+	app.serve_static('/robots.txt', './assets/robots.txt')
 	app.mount_static_folder_at(os.resource_abs_path('./assets'), '/assets')
 	app.mount_static_folder_at(os.resource_abs_path('./img'), '/img')
 }
