@@ -27,12 +27,17 @@ pub fn (mut app App) tags() vweb.Result {
 	return $vweb.html()
 }
 
-@['/:post']
+@['/posts']
+pub fn (mut app App) posts() vweb.Result {
+	return app.redirect('/')
+}
+
+@['/posts/:post']
 pub fn (mut app App) post(name string) vweb.Result {
 	post := app.find_post_by_name(name) or { return app.notfound() }
 	app.debug("user '${app.ip()}' accessed post '${name}'")
 	post_title := post.title
-	post_url := post.url
+	post_url := post.relative_url()
 	chunks := post.text
 	tags := post.tags
 	return $vweb.html()

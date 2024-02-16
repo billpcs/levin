@@ -21,10 +21,10 @@ mut:
 	rss        shared Rss
 }
 
-fn (mut app App) find_post_by_name(url string) !Post {
+fn (mut app App) find_post_by_name(name string) !Post {
 	rlock app.posts {
 		for post in app.posts {
-			if url == post.url {
+			if name == post.id {
 				return post
 			}
 		}

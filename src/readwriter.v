@@ -15,7 +15,7 @@ fn write_post(title string, contents ...string) {
 	post := Post{
 		title: title
 		time: timeval
-		url: file_name
+		id: file_name
 	}
 
 	path := '${posts_path}${file_name}'
@@ -53,9 +53,9 @@ fn sort_by_date(posts []Post) []Post {
 fn read_post(path string) !Post {
 	content := os.read_lines(path)!
 
-	// the file name becomes the url
+	// the file name becomes the id
 	// to ensure uniqueness
-	url := os.file_name(path)
+	id := os.file_name(path)
 
 	/*
 		read until the first '---' which
@@ -81,7 +81,7 @@ fn read_post(path string) !Post {
 		title: metadata.title
 		time: metadata.time
 		tags: metadata.tags
-		url: url
+		id: id
 		text: post_chunked_text
 	}
 }

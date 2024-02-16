@@ -6,7 +6,7 @@ mut:
 	tags  []string
 	time  string
 	text  []Chunk
-	url   string
+	id   string
 }
 
 fn (p Post) header() string {
@@ -19,7 +19,11 @@ fn (p Post) json() string {
 }
 
 fn (p Post) to_string() string {
-	return "${p.url} @ [${p.time}] - \"${p.title}\""
+	return "${p.id} @ [${p.time}] - \"${p.title}\""
+}
+
+fn (p Post) relative_url() string {
+	return 'posts/' + p.id
 }
 
 fn (p Post) get_item_descr_by_tags() string {
@@ -57,7 +61,7 @@ fn (p Post) get_item_descr_by_tags() string {
 fn (p Post) to_rss_item() RssItem {
 	return RssItem{
 		title: p.title
-		link: domain + p.url
+		link: domain + p.relative_url()
 		description: p.get_item_descr_by_tags()
 		pub_date: to_rfc822(p.time) or { '' }
 	}
