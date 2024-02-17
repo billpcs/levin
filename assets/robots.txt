@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /sitemap.xml
 Allow: /posts/
-Disallow: /
