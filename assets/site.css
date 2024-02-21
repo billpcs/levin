@@ -116,7 +116,7 @@ blockquote:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
@@ -132,7 +132,8 @@ blockquote:hover {
 
 .time {
   order: 1;
-  font-family:'Courier New', Courier, monospace
+  font-family:'Courier New', Courier, monospace;
+  text-align: right;
 }
 
 .top-bar {
@@ -141,7 +142,7 @@ blockquote:hover {
 
 .top-bar-element {
   float: left;
-  padding-inline-end: 1%;
+  padding: 5px 1% 5px 1%;
 }
 
 .top-bar-element:hover {
