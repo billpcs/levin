@@ -151,9 +151,10 @@ blockquote:hover {
 
 .about-text {
   caret-color: chocolate;
+  font-family: 'Fira Code';
 }
 
-.post-list-container{
+.general-container{
   min-width: 50%;
   max-width: 60%;
   background: #1a1a1a;
@@ -218,7 +219,7 @@ blockquote:hover {
     display: none;
   }
 
-  .post-list-container {
+  .general-container {
     font-size: 1.2em;
     max-width: 90%;
   }
