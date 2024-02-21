@@ -220,20 +220,18 @@ blockquote:hover {
   }
 
   .general-container {
-    font-size: 1.2em;
     max-width: 90%;
   }
 
   .post {
     column-count: 1;
-    font-size: 1.2em;
   }
 
   .top-bar {
-    font-size: 1.5em;
+    font-size: 1.3em;
   }
 
   .tags {
-    font-size: 1.8em;
+    font-size: 1.5em;
   }
 }
