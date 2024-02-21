@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Barnebok Regular';
+  src: url('BarnebokRegular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Barnebok Bold';
+  src: url('BarnebokBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('FiraCode-Regular.woff') format('woff');
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -5,7 +20,7 @@
 }
 
 html {
-  font-family: monospace;
+  font-family: 'Barnebok Regular', monospace;
   font-size: 1.2em;
   background:#353535;
   color: #ffffff
@@ -17,6 +32,12 @@ a {
 
 h1 {
   text-align: center;
+  font-family: 'Barnebok Bold';
+}
+
+code {
+  color:aqua;
+  font-family: 'Fira Code';
 }
 
 img {
@@ -55,7 +76,7 @@ ul li::marker {
 
 .post-title {
   font-size: xxx-large;
-  font-family: monospace;
+  font-family: 'Barnebok Bold';
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -111,6 +132,7 @@ blockquote:hover {
 
 .time {
   order: 1;
+  font-family:'Courier New', Courier, monospace
 }
 
 .top-bar {
@@ -162,7 +184,6 @@ blockquote:hover {
   column-count: 3;
   column-gap: 5%;
   column-rule-style: groove;
-  font-family: monospace;
 }
 
 .toggle-label {
