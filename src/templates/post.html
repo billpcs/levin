@@ -33,8 +33,10 @@
                     @end
                 </div>
                 <input type="checkbox" id="toggle"/>
-                <label for="toggle" class="toggle-label">cols </label>
-                <div class="post">
+                @if cols == 0
+                    <label for="toggle" class="toggle-label">cols </label>
+                @end
+                <div class="post"  style="column-count: @cols">
                     @post_html
                 </div>
             </div>

@@ -74,5 +74,6 @@ fn read_post(path string) !Post {
 		tags: metadata.tags
 		id: id
 		text: post_text
+		cols: metadata.cols
 	}
 }

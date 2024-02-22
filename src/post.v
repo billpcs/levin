@@ -7,6 +7,7 @@ mut:
 	time  string
 	text  string
 	id   string
+	cols int
 }
 
 fn (p Post) header() string {

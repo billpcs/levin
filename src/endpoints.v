@@ -40,6 +40,7 @@ pub fn (mut app App) post(name string) vweb.Result {
 	post_title := post.title
 	post_url := post.relative_url()
 	tags := post.tags
+	cols := post.cols
 	post_html := vweb.RawHtml(markdown.to_html(post.text))
 	return $vweb.html()
 }
