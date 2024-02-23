@@ -1,16 +1,19 @@
 @font-face {
   font-family: 'Barnebok Regular';
   src: url('BarnebokRegular.woff') format('woff');
+  font-display: fallback;
 }
 
 @font-face {
   font-family: 'Barnebok Bold';
   src: url('BarnebokBold.woff') format('woff');
+  font-display: fallback;
 }
 
 @font-face {
   font-family: 'Fira Code';
   src: url('FiraCode-Regular.woff') format('woff');
+  font-display: fallback;
 }
 
 * {
