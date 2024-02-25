@@ -3,6 +3,7 @@ import log
 
 const port = 8082
 const app_name = 'levin'
+const page_name = 'revithi.space'
 const posts_path = './posts/'
 const domain = 'https://revithi.space/'
 const default_loglevel = log.Level.debug
