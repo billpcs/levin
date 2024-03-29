@@ -1,0 +1,21 @@
+{ "title": "How many drivers rest their hand on the stick shift?", "time": "2024-03-29 22:27:33", "tags": ["cars", "statistics"], "cols": 1 }
+
+
+A short while ago, I stayed for a couple of days at a hotel, in Greece. My room was at the second floor of the hotel, and from the window I had a top-down view of the street below. While I was killing some time looking at the traffic and the pedestrians, I noticed something: I could look into the cabin of every car passing and see where the hands of each driver were!
+
+I have to note here, that in many countries, automatic transmission cars are the norm. However, according to [some stats I found online](https://www.lookupaplate.com/blog/manual-vs-automatic-transmission-statistics/), Greece is in the top three countries with the fewest automatic cars, just below Italy and Spain.
+
+I had since I was very young, that many people would drive with their one hand at the steering wheel and the other on the stick shift. This I think is very common among taxi drivers. And it makes sense. When you have manual transmission, especially in low speed situations - inside the city, it is very likely that you will have to shift gears fairly frequently as you take turns, start and stop at traffic lights or encounter traffic. So I always had this question in my mind: How many people actually do this?
+
+While being there, looking out of the window, I knew I was close to at last having an answer. The conditions were perfect:
+- I was able to deterministically and clearly see inside the cabin of every car for about one second.
+- The cars were not in an acceleration or deceleration mode. According to my judgement, they would probably be in second or third gear, marching along in a low speed environment. This way I wouldn't have any false positives with people actually having just used their hand to change gear and taken it off again. If their hand was on there, then it means they keep it there!
+- I was able to look at many cars at a good rate, as it was a busy Saturday night in the city center.
+
+So I took my pen and paper and started jotting down bars. I realized very quickly that in order to be quick and don't get my mind confused with intricate symbols, I would jot a "|" if the driver wasn't resting their hand on the stick and a "||" if they were resting it.
+
+![](/img/car-statistics.png)
+
+I managed to take 156 measurements before I had to go, which I think is a good sample.
+
+The result? 41% of drivers rests their hand on the stick.
