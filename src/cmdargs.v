@@ -1,7 +1,6 @@
 import cli
 import vweb
 import time
-import os
 import log
 import crypto.md5
 
@@ -49,18 +48,19 @@ fn cmd_print_startup_info(mut app App) {
 }
 
 fn cmd_start(cmd cli.Command) ! {
-	log_file := os.open_append(log_file_path) or {
-		println('failed to open logfile, writing to stdout')
-		os.stdout()
-	}
+	// log_file := os.open_append(log_file_path) or {
+	// 	println('failed to open logfile, writing to stdout')
+	// 	os.stdout()
+	// }
+
+	mut l := log.Log{}
+	l.set_level(default_loglevel)
+	l.set_output_path(log_file_path)
+
 
 	mut app := App{
 		posts: get_posts()
-		logger: log.Log{
-			level: default_loglevel
-			ofile: log_file
-			output_target: log.LogTarget.file
-		}
+		logger: l
 		start_time: time.now()
 		tags: Tags{
 			cached: false
