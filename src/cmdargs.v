@@ -1,5 +1,5 @@
 import cli
-import vweb
+import veb
 import time
 import log
 import crypto.md5
@@ -67,7 +67,7 @@ fn cmd_start(cmd cli.Command) ! {
 		}
 	}
 
-	app.init_server()
+	app.init_server()!
 
 	deamon := cmd.flags.get_bool('deamon')!
 
@@ -75,13 +75,13 @@ fn cmd_start(cmd cli.Command) ! {
 	generate_rss(mut app)!
 
 	if !deamon {
-		spawn vweb.run(&app, port)
+		spawn veb.run[App, Context](mut &app, port)
 		cmd_print_startup_info(mut &app)
 		// start REPL after a while
 		time.sleep(time.second)
 		commander(mut &app)
 	} else {
-		vweb.run(&app, port)
+		veb.run[App, Context](mut &app, port)
 	}
 }
 
