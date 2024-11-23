@@ -48,11 +48,6 @@ fn cmd_print_startup_info(mut app App) {
 }
 
 fn cmd_start(cmd cli.Command) ! {
-	// log_file := os.open_append(log_file_path) or {
-	// 	println('failed to open logfile, writing to stdout')
-	// 	os.stdout()
-	// }
-
 	mut l := log.Log{}
 	l.set_level(default_loglevel)
 	l.set_output_path(log_file_path)

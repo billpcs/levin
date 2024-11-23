@@ -17,11 +17,6 @@ pub fn (mut app App) notfound(mut ctx Context, path string) veb.Result {
 	return $veb.html()
 }
 
-@['/']
-pub fn (mut app App) slash(mut ctx Context) veb.Result {
-	return app.index(mut ctx)
-}
-
 @['/tags']
 pub fn (mut app App) tags(mut ctx Context) veb.Result {
 	tags := app.get_all_tags()
