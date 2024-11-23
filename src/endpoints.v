@@ -11,8 +11,8 @@ pub fn (mut app App) about(mut ctx Context) veb.Result {
 	return $veb.html()
 }
 
-pub fn (mut app App) notfound(mut ctx Context) veb.Result {
-	app.debug("user '${ctx.ip()}' went to notfound")
+pub fn (mut app App) notfound(mut ctx Context, path string) veb.Result {
+	app.debug("NOTFOUND: user '${ctx.ip()}' tried going to ${path}")
 	ctx.res.set_status(.not_found)
 	return $veb.html()
 }
@@ -35,7 +35,9 @@ pub fn (mut app App) posts(mut ctx Context) veb.Result {
 
 @['/posts/:post']
 pub fn (mut app App) post(mut ctx Context, name string) veb.Result {
-	post := app.find_post_by_name(name) or { return app.notfound(mut ctx) }
+	post := app.find_post_by_name(name) or {
+		return app.notfound(mut ctx, "/post/ with name '${name}'")
+	}
 	app.debug("user '${ctx.ip()}' accessed post '${name}'")
 	post_title := post.title
 	post_url := post.relative_url()
@@ -47,6 +49,5 @@ pub fn (mut app App) post(mut ctx Context, name string) veb.Result {
 
 @['/:other...']
 pub fn (mut app App) catchall(mut ctx Context, path string) veb.Result {
-	return app.notfound(mut ctx)
-	// return ctx.text('other')
+	return app.notfound(mut ctx, "'${path}'")
 }
