@@ -35,8 +35,7 @@ pub fn (mut app App) posts(mut ctx Context) veb.Result {
 
 @['/posts/:post']
 pub fn (mut app App) post(mut ctx Context, name string) veb.Result {
-	// post := app.find_post_by_name(name) or { return app.notfound(mut ctx) }
-	post := app.find_post_by_name(name) or { return ctx.text('not found') }
+	post := app.find_post_by_name(name) or { return app.notfound(mut ctx) }
 	app.debug("user '${ctx.ip()}' accessed post '${name}'")
 	post_title := post.title
 	post_url := post.relative_url()
