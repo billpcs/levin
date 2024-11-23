@@ -48,6 +48,6 @@ pub fn (mut app App) post(mut ctx Context, name string) veb.Result {
 
 @['/:other...']
 pub fn (mut app App) catchall(mut ctx Context, path string) veb.Result {
-	// return app.notfound(mut ctx)
-	return ctx.text('other')
+	return app.notfound(mut ctx)
+	// return ctx.text('other')
 }
