@@ -8,6 +8,7 @@ const posts_path = './posts/'
 const domain = 'https://revithi.space/'
 const default_loglevel = log.Level.debug
 const log_file_path = os.expand_tilde_to_home('~/.cache/levin.log')
+const max_stats_entries = 500
 
 fn main() {
 	mut commands := cmd_base()

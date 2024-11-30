@@ -53,6 +53,9 @@ pub fn (mut app App) post(mut ctx Context, name string) veb.Result {
 pub fn (mut app App) catchall(mut ctx Context, path string) veb.Result {
 	lock app.stats {
 		app.stats.list[path] += 1
+		if app.stats.list.keys().len > max_stats_entries {
+			map_delete_oldest_key(mut app.stats.list)
+		}
 	}
 	return app.notfound(mut ctx, "'${path}'")
 }

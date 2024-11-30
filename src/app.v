@@ -12,7 +12,7 @@ mut:
 
 struct Stats {
 mut:
-	list   map[string]int
+	list   map[string]u32
 }
 
 pub struct Context {
@@ -85,11 +85,11 @@ fn (mut app App) get_all_tags() map[string][]Post {
 	}
 }
 
-fn (mut app App) get_stats() map[string]int {
+fn (mut app App) get_stats() map[string]u32 {
 	lock app.stats {
 		return app.stats.list
 	}
-	return {'/nicefind':0}
+	return {'/nicefind': u32(0)}
 }
 
 fn (mut app App) get_rss(force_reload bool) Rss {
