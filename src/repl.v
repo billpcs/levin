@@ -94,14 +94,12 @@ fn build_str_rec(elapsed time.Duration, str string) string {
 	}
 }
 
-fn show_uptime(mut app App) {
+fn get_uptime(mut app App) string {
 	now := time.now()
 	elapsed := now - app.start_time
-
 	str := '${build_str_rec(elapsed, 'uptime:')}'
-
-	println(str)
 	app.debug(str)
+	return str
 }
 
 fn show_help() {
@@ -137,7 +135,7 @@ fn commander(mut app App) {
 				show_db()
 			}
 			'uptime', 'up', 'u' {
-				show_uptime(mut app)
+				println(get_uptime(mut app))
 			}
 			'loglevel', 'log', 'l' {
 				handle_loglevel(mut app, ...args)

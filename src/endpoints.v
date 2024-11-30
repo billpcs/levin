@@ -35,6 +35,11 @@ pub fn (mut app App) posts(mut ctx Context) veb.Result {
 	return ctx.redirect('/')
 }
 
+@['/uptime']
+pub fn (mut app App) uptime(mut ctx Context) veb.Result {
+	return ctx.text(get_uptime(mut app))
+}
+
 @['/posts/:post']
 pub fn (mut app App) post(mut ctx Context, name string) veb.Result {
 	post := app.find_post_by_name(name) or {
