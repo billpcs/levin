@@ -25,6 +25,7 @@ pub fn (mut app App) tags(mut ctx Context) veb.Result {
 
 @['/stats']
 pub fn (mut app App) stats() veb.Result {
+	uptime := get_uptime(mut app)
 	stats := app.get_stats()
 	return $veb.html()
 }

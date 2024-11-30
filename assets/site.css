@@ -70,7 +70,7 @@ ul li::marker {
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 95%;
 	border: 4px solid hotpink;
   padding: 10px;
   border-radius: 1em;
@@ -209,6 +209,8 @@ blockquote:hover {
   display: flex;
   flex-direction: column;
   row-gap: 1%;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
 
 .tags {
