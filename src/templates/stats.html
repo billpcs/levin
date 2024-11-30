@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @css '/assets/site.css'
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <header>
+        <title>@page_name/tags</title>
+    </header>
+    <body>
+        <div class=top-bar>
+            <div class="top-bar-element">
+                <a href="/">> home </a>
+            </div>
+            <div class="top-bar-element">
+                <a href="/tags">> tags </a>
+            </div>
+            <div class="top-bar-element">
+                <a href="/rss.xml" target="_blank">> rss </a>
+              </div>
+            <div class="top-bar-element">
+                <a href="/about">> about this </a>
+            </div>
+        </div>
+        <div class="table">
+            <div class="table-header">
+                <div class="table-data">Path</div>
+                <div class="table-data">Count</div>
+            </div>
+            @for request, count in stats
+                <div class="table-row">
+                    <div class="table-data">@request</div>
+                    <div class="table-data">@count</div>
+                </div>
+            @end
+        </div>
+    </body>
+</html>

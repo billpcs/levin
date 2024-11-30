@@ -10,6 +10,11 @@ mut:
 	list   map[string][]Post
 }
 
+struct Stats {
+mut:
+	list   map[string]int
+}
+
 pub struct Context {
     veb.Context
 }
@@ -23,6 +28,7 @@ mut:
 	logger     shared log.Log
 	tags       shared Tags
 	rss        shared Rss
+	stats 	   shared Stats
 }
 
 fn (mut app App) find_post_by_name(name string) !Post {
@@ -77,6 +83,13 @@ fn (mut app App) get_all_tags() map[string][]Post {
 			return app.tags.list
 		}
 	}
+}
+
+fn (mut app App) get_stats() map[string]int {
+	lock app.stats {
+		return app.stats.list
+	}
+	return {'/nicefind':0}
 }
 
 fn (mut app App) get_rss(force_reload bool) Rss {

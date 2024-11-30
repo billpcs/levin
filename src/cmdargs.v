@@ -60,6 +60,7 @@ fn cmd_start(cmd cli.Command) ! {
 		tags: Tags{
 			cached: false
 		}
+		stats: Stats{}
 	}
 
 	app.init_server()!

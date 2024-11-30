@@ -23,6 +23,13 @@ pub fn (mut app App) tags(mut ctx Context) veb.Result {
 	return $veb.html()
 }
 
+@['/stats']
+pub fn (mut app App) stats() veb.Result {
+	stats := app.get_stats()
+	return $veb.html()
+}
+
+
 @['/posts']
 pub fn (mut app App) posts(mut ctx Context) veb.Result {
 	return ctx.redirect('/')
@@ -44,5 +51,8 @@ pub fn (mut app App) post(mut ctx Context, name string) veb.Result {
 
 @['/:other...']
 pub fn (mut app App) catchall(mut ctx Context, path string) veb.Result {
+	lock app.stats {
+		app.stats.list[path] += 1
+	}
 	return app.notfound(mut ctx, "'${path}'")
 }

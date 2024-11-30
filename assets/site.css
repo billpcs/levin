@@ -65,6 +65,46 @@ ul li::marker {
   content: "▶"; 
 }
 
+.table {
+  display:flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+	border: 4px solid hotpink;
+  padding: 10px;
+  border-radius: 1em;
+  justify-content:center;
+  align-items:center;
+}
+
+.table-header {
+	display:flex;
+	width:100%;
+  border-radius: 5px;
+	background:#000;
+  font-family: monospace;
+  margin: 2px;
+}
+
+.table-row {
+	display:flex;
+	width:100%;
+  border-radius: 5px;
+	&:nth-of-type(odd) {
+    background: #202020;
+	}
+  &:nth-of-type(even) {
+    background: #686868;
+	}
+  font-family: monospace;
+  margin: 2px;
+}
+
+.table-data {
+	flex: 1 1 20%;
+	text-align:center;
+}
 
 .post-page {
   position: relative;
