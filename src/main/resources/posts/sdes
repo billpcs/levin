@@ -1,0 +1,215 @@
+{ "title": "SDES in Scala", "time": "2018-03-25 16:22:29", "tags": ["scala", "cryptography"] }
+
+
+
+# Implementing Simplified Data Encryption Standard in Scala
+
+_(I intended for this blog post to be a full explanation of my SDES implementation, but it got too long too fast. Therefore, in this post I focused mostly on the binary number representation and didn't analyze other topics such as the test suite and the class hierarchies, topics that I will maybe address in a future post --probably never)_
+
+
+# Intro
+DES is a symmetric algorithm for encrypting data. Simplified DES or SDES, as I will refer to it from now on, is a simple version of DES, which is used to familiarize the students with the inner workings of the algorithm without getting too involved with details. I happened to implement it for a semester course project and below are some of my thoughts.
+
+
+# What I wanted to do differently
+
+One of the first things I had to consider was how the binary numbers were going to be dealt with internally. Programming languages don't usually have variable types for "Bit". The variable type with the smallest amount of memory you can generally get is a Byte. SDES uses binary numbers of three sizes: **4**, **8** and **10 bit** numbers.
+
+What I came across regularly when browsing solutions on SDES was people saving binary numbers as arrays of integers, meaning saving 1's and 0's in an array. I didn't like this approach for various reasons. Firstly, it wastes too much space. This is because, even though we save the information of **one** bit in one array cell, it takes the space of at least 8 bits, if we decide to make it an Array[Byte] (and this is the best we can do in terms of memory with this type). This also means that we have to implement bitwise operations that are used extensively in SDES, from scratch. A _bitwise xor_ for example would probably have to be implemented as presented below:
+
+
+```scala
+type Binary = Array[Byte]
+def xor(xs: Binary, ys: Binary): Binary =
+    for {
+      (a, b) <- (xs zip ys)
+    } yield (a ^ b).toByte
+```
+
+Let's break up the above function.
+
+The first line just says _"Instead of me writing `Array[Byte]` all the time, from now on I will refer to it as `Binary`"_. This way the function is more readable and shorter. In other words, `Binary` is an _alias_ for `Array[Byte]`.
+
+Then we define the function `xor`, which receives two binary numbers (of type `Binary`) and outputs a third one, as should a _xor_ function do. Internally, it zips the two arrays, creating an array of pairs, which then takes one by one and yields the result using the `^` function defined for `Byte`.
+
+The _xor_ function `^` is in reality a bitwise operator and because the array contains only 1's and 0's, it works as expected and produces correct results.
+
+Notice that the running time of the above function is linear and depends on length of the array, i.e the number of bits, as we have to pass through the whole array and `xor` the elements one by one. This is another reason I don't like this solution.
+
+
+# My Solution
+So, after noting these two problems, I started thinking about a different solution. In order for `xor` operations to execute in almost constant time, we could have **the whole binary number saved in a Short integer**. In this way the operation can be done in one go. With a single `^` we can have the result of what previously we created a O(n) function for. A `Short` can be 16 bits, which means we can save the 4, 8 and 10 bit numbers we need, in a single _Short_. With this approach we kill two birds with one stone, as we also solve the problem of using too much memory. Let's see why.
+
+## Memory
+For starters, let's examine the impact on the memory usage for storing a 4bit number in these two cases.
+
+In the case of the `Array[Byte]` we would have 4 elements, each with a size of a `Byte` meaning 4*8 = 32 bits.
+
+In the second case we would use a `Short` to store the 4bit number, meaning 16 bits.
+
+In the case of 10bit numbers, the first way yields _80 bits_ and the second stays the same: 16 bits. We can thus see, that even in the worst case, the second way uses less memory.
+
+With some [quick maths](https://www.youtube.com/watch?v=X09oxyIeGuY), for the worst case we get 50% less memory usage and for the best case 80% less memory usage.
+
+## Speed
+For bitwise operations we should get about 4x to 10x speedup (depending on which binary size is the mean). But not everything in the algorithm is about bitwise operations so this figure should be much much lower when executing a whole cycle of the algorithm.
+
+After running some benchmarks, using [Scalameter](https://scalameter.github.io/), it turns out that the second approach gives about **2x speedup**. Before seeing how this number came out to be, we should first take closer a look at some key elements of my implementation and then contrast it with how this would change for the "array way" of looking at binary numbers.
+
+For simplicity, we are going to consider the 4 bit case.The other two cases (8 and 10 bit) are almost the same, having only minor differences.
+
+
+## Bit4
+
+I decided to call the class which is going to contain the information for a 4 bit number `Bit4`. So let's start with a constructor.
+
+```scala
+class Bit4(val v: Short)
+```
+
+Then, have to implement the `xor` method:
+
+```scala
+class Bit4(val v: Short) {
+  def |^|(that: Bit4) =
+    Bit4((this.v ^ that.v).toShort)
+}
+```
+
+But this is wrong! We only want the 4 LSB of the value `v` to be accounted for in the result. By doing this we get values greater than the range a 4 bit number could have. Since numbers are represented in `two's complement` format, the range for 4 bits should be [-8 to 7]. So, how can we solve this problem?
+
+## Bit masks to the rescue!
+
+I really don't know if there is a better way, but here is what I did.
+
+```scala
+class Bit4(private val v: Short) {
+
+  val value = {
+    if (((v >> 3) & 0x1) == 1) (0xFFFFFFF0 | (v & 0xF)).toShort
+    else (v & 0xF).toShort
+  }
+
+  def |^|(that: Bit4) =
+    Bit4((this.value ^ that.value).toShort)
+}
+```
+
+What the above code does is check whether we need to do a sign extension with ones, i.e checks if the MSB is one. If it is, we mask the 4 LSB and sign extend the rest. If it is not, we just mask the 4 LSB. This way, whatever the input value to the constructor, the `value` will always contain a number in the correct range. If the initial element was not in the correct range, then it is a problem of the caller. I have made the decision not to report anything back or throw an exception.
+
+The final code for `Bit4` looks something like this:
+
+```scala
+case class Bit8(v: Int) extends BinaryNum {
+  def this(s: String) = this(Integer.parseInt(s, 2).toShort)
+
+  def this(ar: Array[Bit]) = this(ar.mkString)
+
+  // consider the input as a 4bit two's complement
+  // so do sign extension as required
+  val value = {
+    if (((v >> 3) & 0x1) == 1) (0xFFFFFFF0 | (v & 0xF)).toShort
+    else (v & 0xF).toShort
+  }
+
+  override def apply(n: Int): Bit = Bit(((this.value >> (4 - n)) & 0x1).toByte)
+
+  def map(f: Short => Short) = Bit4(f(this.value))
+
+  def flatMap(f: Short => Bit4): Bit4 = f(this.value)
+
+  def map2(that: Bit4)(f: (Short, Short) => Short): Bit4 = for {
+    a <- this
+    b <- that
+  } yield f(a, b)
+
+  def |^|(that: Bit4): Bit4 = this.map2(that)(_ ^ _ toShort)
+
+  def toBits: Array[Bit] = (1 to 4).map(this (_)).toArray
+
+  def binary = intTo8BitString(value) drop 4
+
+  def concat(that: Bit4): Bit8 = Bit8(((this.value << 4) | (that.value & 0xF)).toByte)
+
+  override def equals(o: scala.Any): Boolean = o match {
+    case x: Bit4 => this.value == x.value
+    case _ => false
+  }
+}
+```
+
+I have just made two auxiliary constructors for creating a Bit4 by passing a binary string (e.g Bit4("0010")) or by passing an array of bits. I also made the class a _**case class**_ and added an `apply` method. Without the case class (or a companion object) you would have to write `new Bit4(4)` when creating instances. What Scala allows with case classes is to remove the need for the `new` keyword. We can simply write `Bit4(10)` and create instances throughout the code base. The way the `apply` method is implemented allows for this kind of syntax:
+
+```scala
+scala> val num = sdes.Bit4(4)
+num: sdes.Bit4 = 4 (0b0100)
+
+scala> num(2)
+res0: sdes.Bit = 1
+```
+
+Because many times, during the execution of the algorithm we need to extract a certain bit out of the binary number, this method allows as to do so easily. For instance, if we want to get the second bit as in the above example (counting from the MSB) we just need to call `num(2)` and we will get `1` as expected. We could have easily made a method called `getBit(n: Int): Bit`, but to me, the usage of apply here makes the Bit4 class a seem more like a list of bits.
+
+BinaryNum is just a base trait for all the classes (Bit4, Bit8 and Bit10).
+
+That's all.
+
+## The benchmark
+
+I wanted to see if my reasoning for choosing this method was correct and there was indeed a remarkable performance penalty when using arrays to represent binary numbers.
+
+In order to test the performance, I had to make some changes and the main such change was made to the |^| function (the `concat` and `split` functions also needed to be changed, but you can check them out yourself).
+
+```scala
+// ....
+
+lazy val bvalue = toBits
+
+def |^|(that: Bit4): Bit4 =
+  Bit4((this.bvalue zip that.bvalue).map{
+    case (a, b) =>  Bit((a.value ^ b.value).toByte)
+  })
+
+// ...
+```
+
+I ran the following code using Scalameter
+
+
+```scala
+import org.scalameter.api._
+
+object RangeBenchmark extends Bench.ForkedTime {
+  val ranges = for {
+    size <- Gen.range("size")(1000, 2000, 100)
+  } yield 0 until size
+
+  val encdec = sdes.SDES(12)
+
+  val m = measure method "encrypt/decrypt" in {
+    using(ranges) in {
+      _.map(el => encdec.decryptByte(encdec.encryptByte(el.toByte)))
+    }
+  }
+}
+```
+
+The results in milliseconds rounded to the nearest integer are given below:
+
+```scala
+// xor with array
+val xor_ar = Array(45, 51, 55, 59, 64, 68, 73, 80, 91, 96, 99)
+
+//xor native
+val xor_nt = Array(20, 26, 28, 30, 32, 34, 36, 39, 41, 43, 45)
+```
+
+The average speedup is:
+
+```scala
+(xor_ar zip xor_nt).map{ case(a, n) => 1.0*a/n }.sum / xor_ar.length
+```
+
+The full source code can be found on my github page: https://github.com/billpcs/sdes
+
+Cheers!

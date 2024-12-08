@@ -1,0 +1,43 @@
+@(id: String, title: String, cols: Int)(body: Html)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/stylesheets/default.css">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/assets/prism.css">
+    </head>
+    <header>
+        <title>@id</title>
+    </header>
+    <body>
+        <div class=post-page>
+            <div class=top-bar>
+                <div class="top-bar-element">
+                    <a href="/">> home </a>
+                </div>
+                <div class="top-bar-element">
+                    <a href="/tags">> tags </a>
+                </div>
+                <div class="top-bar-element">
+                    <a href="/rss.xml" target="_blank">> rss </a>
+                </div>
+                <div class="top-bar-element">
+                    <a href="/about">> about this </a>
+                </div>
+            </div>
+            <div class=post-container>
+                <h1 class=post-title>@title</h1>
+            </div>
+            <input type="checkbox" id="toggle"/>
+            @if(cols == 0){
+                <label for="toggle" class="toggle-label">cols </label>
+            }
+            <div class="post"  style="column-count: @cols">
+                @body
+            </div>
+        </div>
+    </div>
+    <script src="/assets/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{ "title": "Hello world!", "time": "2023-12-21 15:42:17", "tags": ["rss", "hosting", "proxy", "nginx"] }
+
+# Hello
+
+For a long while I have been saying
+
+> "one day I want to run my own public blog"
+
+This is the story of how this site finally came to be.
+
+About 7 years ago -that's a lot, the commit history blows my mind sometimes- I did create a blog on github pages. It's still there as of now @ https://billpcs.github.io/. I even wrote some blog posts there, one every year from 2016 to 2020. I then stopped. But anyway, that's beside the point.
+
+I always wanted to host my own site. Run my own server. Have more control in a sense. Learn and apply all the stuff that needs to be done. But it always seemed complicated. I seemed to ask the wrong questions. And when I asked the correct ones, the answers seemed complicated. Where do you start? I have to find a hosting service? And I have to pay? If I don't find one, I'll have to host it from my home network with all the security issues that come with it? These were my thoughts.
+
+For a while I have been building my own blog from scratch using `v` and `vweb`, but I didn't have a clear idea of the timeline or where/how I was going to host it. I was writing it for when the time was right. I knew that at some point the correct information would reach my eyes and everything would click. And indeed, this happened while browsing HackerNews, some days ago. The post that changed everything was actually a post from 2020 that was posted (actually reposted?) now. It's funny, because now that I think about it, if I had seen this when it was originally posted in 2020, I may have been able to not break the 4 year streak I had with posting, by doing this post back in 2021 instead of now (2023).
+
+The post in question is this: http://blog.notryan.com/009.txt. It's a blog of a person, explaining how they are running their blog out of their closet, on an old laptop. I really love their simple blog style, their setup, their way of explaining things. Their whole server is some 100 lines of C. With some extra lines they have added support for RSS, which inspired me to also implement it, as I also love RSS. It's so simple, yet so valuable to whoever is using it. On that post I also learned about Vultr VPS, which has a cheap enough hosting service. I learned about reverse proxies. It prompted me to understand just how easy it is to get HTTPS nowadays with Let's Encrypt - no more than 5 terminal commands really. So just this small post created an explosion of ideas of things to try or implement in my mind. So here I am.
+
+To recap, I have:
+
+- my handmade static blog I have been writing (CSS, HTML, with my small markdown language, post logic and endpoints)
+- RSS support
+- NGINX reverse proxy to handle connections for me
+- HTTPS
+
+All these running on a Vultr sever with 2 vCPUs, 2GB RAM

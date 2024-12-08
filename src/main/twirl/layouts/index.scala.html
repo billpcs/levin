@@ -1,0 +1,43 @@
+@(posts: List[space.revithi.Post])
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/stylesheets/default.css">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <header>
+    <title>levin home page</title>
+  </header>
+  <body>
+    <div class=top-bar>
+      <div class="top-bar-element">
+        <a href="/">> home </a>
+      </div>
+      <div class="top-bar-element">
+        <a href="/tags">> tags </a>
+      </div>
+      <div class="top-bar-element">
+        <a href="/rss.xml" target="_blank">> rss </a>
+      </div>
+      <div class="top-bar-element">
+        <a href="/about">> about this </a>
+      </div>
+    </div>
+    <div>
+      <h1>home</h1>
+    </div>
+    <div class=general-container>
+      @for(post <- posts) {
+      <div class=time-topic-container>
+        <div class=time> @{post.metadata.time}</div>
+        <div class=topic>
+          <a href=@post.relative_url> &#x270E; @post.metadata.title</a>
+        </div>
+      </div>
+      }
+    </div>
+  </body>
+</html>

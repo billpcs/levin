@@ -1,0 +1,28 @@
+{ "title": "The Power Of Abstraction", "time": "2017-05-20 21:34:27" }
+
+
+### A simple demonstration
+
+You are outside a restaurant. You get in and sit at a table. The waiter brings you the menu and you choose a steak. You tell the waiter about your decision and after some time (hopefully not too much) the waiter brings a steak to your table. You eat the steak and leave.
+
+__To really understand what powerful a concept abstraction is, let's examine how your night would have changed if abstractions were non existent.__
+
+You are outside a restaurant. You get in and sit at a table. You wait for the waiter to come and bring you a menu, but after about 5 minutes you loose your patience. You get up and try to find a menu yourself. After spending a couple of minutes searching you realize there are no menus lying around. "Anyway", you think, "I already know what I want, I will have a steak". You look around to find the waiter and inform him about your choice. But of course, you have seen no waiter from the time you came in. It has been a long time since you last had a meal so, hungry as you are, you decide to visit the kitchen and tell them yourself about your steak. Frustrated, you storm in only in your amazement, to find no one there. You are truly puzzled by now. But you are more hungry than puzzled so you open the kitchen fridge.
+
+You get the idea. This can go further and further. You could open the fridge only to find it empty. Because there is no one to supply the steaks to the restaurant. You have to drive on your own to the farm, raise your own animals. Feed them on your own and find their food on your own.
+
+You could go as far as to say that you would have to make your own forks, your own chairs, your own fridges, your own trucks, your own stables. Because nothing is made for you. You would have to reach the bare metal to imagine an end to this chain.
+
+__Did you notice? The raw materials are there, they are not missing! It is just that there is nobody to abstract them in order to reach you.__
+
+### So here is how abstraction works in this context.
+
+You don't care how the waiter will pass on your order to the kitchen. It could be by words, by a piece of paper, or by an App on his smart-phone. As long as he does it correctly you don't mind. The waiter on his part, does not care how the kitchen master will cook the steak. He could have his assistants do it, he could do it by himself, use that or the other recipe. The cook is only constrained by what this piece of paper says he has to prepare. When he finishes the dish, he just places it in a special place where the waiter can find it and deliver it to you. In much the same way, we can move down the chain.The cook doesn't care how the meat got in the kitchen, as long as it meets his standards, the driver that brought it doesn't care what kind of meat the box contains, or how it was made, as long as he delivers to the recipient labeled on the box. Moving further down, the meat company CEO has no interest in knowing the specifics of this meat order by the restaurant, as long as his company complies with health and quality standards and there is someone to do the distribution.
+
+__See the pattern? Nobody has to know how anyone above or below him/her works. The only trait needed is to know how to interact with them.__
+
+One could write endless pages thinking about abstractions and relations in our daily world. But let me stop here.
+
+- The above example may seem obvious. And I will argue that it is. __But only because this pyramid of duties had time to adapt throughout the human history. The challenge comes when you need to scale a system like a company, a product or a protocol with no errors and in little to no time.__
+
+- My goal is to write some follow ups to this post analyzing some of the greatest incarnations of abstractions in technology in todays world.
