@@ -1,5 +1,6 @@
 src/src
 assets/rss.xml
 .metals/
+project/target/
 target/
 levin
