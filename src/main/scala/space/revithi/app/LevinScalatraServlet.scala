@@ -1,13 +1,19 @@
 package space.revithi.app
 
-import org.scalatra._
 import space.revithi._
+import org.scalatra._
 import scala.annotation.switch
 import play.twirl.api.Html
 import java.io.File
+import scala.jdk.CollectionConverters._
+import com.github.benmanes.caffeine.cache.{Caffeine, Cache}
 
 
 class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
+
+  val notFoundCache: Cache[String, Int] = Caffeine.newBuilder()
+    .maximumSize(1000) 
+    .build()
 
   val posts_sorted = posts.values.toList.sortWith{
       case (a,b) => a.metadata.time > b.metadata.time
@@ -26,6 +32,17 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
     .map {
       case (tag, v) => (tag, v.map(_._2).toList)
     }
+  
+  val rss = Rss(
+    version = Rss.version,
+    channel = RssChannel(
+      title = Rss.title,
+      link = "https://revithi.space",
+      description = Rss.description,
+      items = posts.map(p => p._2.toRssItem())
+    ),
+    cached = true
+  )
 
   get("/") {
     views.html.index(posts_sorted)
@@ -48,4 +65,19 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
     views.html.tags(tags_to_posts)
   }
 
+  get("/rss.xml") {
+    contentType = "application/xml"
+    Ok(rss)
+  }
+
+  get("/home") {
+    redirect("/")
+  }
+
+  get("/stats") {
+    contentType = "text/plain"
+    notFoundCache.asMap().asScala.map { case (url, count) =>
+      s"$url -> $count times"
+    }.mkString("\n")
+  }
 }

@@ -1,0 +1,76 @@
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+        
+            <title>Levin Blog (by revithi)</title>
+            <link>https://revithi.space</link>
+            <description>Technology and my thoughts</description>
+            <atom:link href="${c.link}/rss.xml" rel="self" type="application/rss+xml"/>
+            List(
+        <item>
+            <title>The Power Of Abstraction</title>
+            <link>https://revithi.space/posts/abstraction</link>
+            <description></description>
+            <pubDate>temp</pubDate>
+            <guid>https://revithi.space/posts/abstraction</guid>
+        </item>
+        , 
+        <item>
+            <title>How many drivers rest their hand on the stick shift?</title>
+            <link>https://revithi.space/posts/cars</link>
+            <description>cars, statistics</description>
+            <pubDate>temp</pubDate>
+            <guid>https://revithi.space/posts/cars</guid>
+        </item>
+        , 
+        <item>
+            <title>SDES in Scala</title>
+            <link>https://revithi.space/posts/sdes</link>
+            <description>scala, cryptography</description>
+            <pubDate>temp</pubDate>
+            <guid>https://revithi.space/posts/sdes</guid>
+        </item>
+        , 
+        <item>
+            <title>An intro to DPDK for mortals</title>
+            <link>https://revithi.space/posts/dpdk</link>
+            <description>dpdk, c, ip</description>
+            <pubDate>temp</pubDate>
+            <guid>https://revithi.space/posts/dpdk</guid>
+        </item>
+        , 
+        <item>
+            <title>The fun of feeling in control</title>
+            <link>https://revithi.space/posts/fun</link>
+            <description>hosting, kernel</description>
+            <pubDate>temp</pubDate>
+            <guid>https://revithi.space/posts/fun</guid>
+        </item>
+        , 
+        <item>
+            <title>The first blog post</title>
+            <link>https://revithi.space/posts/first</link>
+            <description>ip, scala, python</description>
+            <pubDate>temp</pubDate>
+            <guid>https://revithi.space/posts/first</guid>
+        </item>
+        , 
+        <item>
+            <title>I don't want to write a program</title>
+            <link>https://revithi.space/posts/tcpdump</link>
+            <description>bash</description>
+            <pubDate>temp</pubDate>
+            <guid>https://revithi.space/posts/tcpdump</guid>
+        </item>
+        , 
+        <item>
+            <title>Hello world!</title>
+            <link>https://revithi.space/posts/hello</link>
+            <description>rss, hosting, proxy, nginx</description>
+            <pubDate>temp</pubDate>
+            <guid>https://revithi.space/posts/hello</guid>
+        </item>
+        )
+        
+        </rss>
+        

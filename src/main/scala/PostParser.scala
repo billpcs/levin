@@ -22,7 +22,16 @@ case class Post(
     metadata: PostMetadata,
     contents: String,
     relative_url: String,
-)
+  ) {
+  def toRssItem(): RssItem = {
+    RssItem(
+      title = metadata.title,
+      link = "https://revithi.space/" + relative_url,
+      description = metadata.tags.mkString(", "),
+      pub_date = Util.to_rfc822(metadata.time)
+    )
+  }
+}
 
 object PostReader {
 
@@ -55,7 +64,7 @@ object PostReader {
     (metadata, rest)
   }
 
-  def get(): Map[String, Post] = {
+  def getPostsMap(): Map[String, Post] = {
     val parser = Parser.builder().build()
     val renderer = HtmlRenderer.builder().build()
     readPosts().map { (name, contents) =>

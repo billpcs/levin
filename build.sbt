@@ -14,7 +14,8 @@ lazy val hello = (project in file("."))
       "org.eclipse.jetty.ee10" % "jetty-ee10-webapp" % "12.0.10" % "container",
       "jakarta.servlet" % "jakarta.servlet-api" % "6.0.0" % "provided",
       "com.lihaoyi" %% "upickle" % "3.1.0",
-      "com.vladsch.flexmark" % "flexmark-all" % "0.64.8"
+      "com.vladsch.flexmark" % "flexmark-all" % "0.64.8",
+      "com.github.ben-manes.caffeine" % "caffeine" % "3.1.8"
     ),
   )
 

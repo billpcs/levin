@@ -5,7 +5,7 @@ import jakarta.servlet.ServletContext
 
 class ScalatraBootstrap extends LifeCycle {
   override def init(context: ServletContext): Unit = {
-    val posts = PostReader.get()
+    val posts: Map[String, Post] = PostReader.getPostsMap()
     context.mount(new LevinScalatraServlet(posts), "/*")
   }
 }
