@@ -44,6 +44,8 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
     cached = true
   )
 
+
+
   get("/") {
     views.html.index(posts_sorted)
   }
@@ -80,4 +82,11 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
       s"$url -> $count times"
     }.mkString("\n")
   }
+
+  get("/:other") {
+    views.html.notfound()
+  }
+
+  // notFound {
+  // }
 }
