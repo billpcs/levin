@@ -1,0 +1,40 @@
+@(tags_to_posts: Map[String, List[space.revithi.Post]])
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/stylesheets/default.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <header>
+        <title>tags</title>
+    </header>
+    <body>
+        <div class=top-bar>
+            <div class="top-bar-element">
+                <a href="/">> home </a>
+            </div>
+            <div class="top-bar-element">
+                <a href="/tags">> tags </a>
+            </div>
+            <div class="top-bar-element">
+                <a href="/rss.xml" target="_blank">> rss </a>
+              </div>
+            <div class="top-bar-element">
+                <a href="/about">> about this </a>
+            </div>
+        </div>
+        <ul>
+            <div class="tags">
+                @for((tag, posts) <- tags_to_posts){
+                <li><a href=""># @tag </a></li>
+                <ul>
+                    @for(post <- posts){
+                    <li><a href="/@post.relative_url"> @post.metadata.title </a></li>
+                    }
+                </ul>
+                }
+            </div>
+        </ul>
+    </body>
+</html>

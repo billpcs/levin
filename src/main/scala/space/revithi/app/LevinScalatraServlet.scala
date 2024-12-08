@@ -12,6 +12,20 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
   val posts_sorted = posts.values.toList.sortWith{
       case (a,b) => a.metadata.time > b.metadata.time
     }
+  
+  val post_tags = posts.map{case(k, v) => (k, v.metadata.tags)}
+  val tags_to_posts: Map[String, List[Post]] = posts
+    .map {
+      case(k, v) => (v, v.metadata.tags)
+    }
+    .map { 
+      case (post, tags) => tags.map(tag => (tag, post))
+    }
+    .flatten
+    .groupBy(_._1)
+    .map {
+      case (tag, v) => (tag, v.map(_._2).toList)
+    }
 
   get("/") {
     views.html.index(posts_sorted)
@@ -31,7 +45,7 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
   }
 
   get("/tags") {
-    redirect("/")
+    views.html.tags(tags_to_posts)
   }
 
 }
