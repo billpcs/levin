@@ -83,10 +83,12 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
     }.mkString("\n")
   }
 
-  get("/:other") {
-    views.html.notfound()
+  notFound {
+    val requestUrl = request.getRequestURI
+    serveStaticResource() getOrElse {
+      val newCount = notFoundCache.get(requestUrl, _ => 0) + 1
+      notFoundCache.put(requestUrl, newCount)
+      NotFound(views.html.notfound())
+    }
   }
-
-  // notFound {
-  // }
 }
