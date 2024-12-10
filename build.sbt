@@ -26,3 +26,4 @@ Test / fork := true
 
 Jetty / containerLibs := Seq("org.eclipse.jetty.ee10" % "jetty-ee10-runner" % "12.0.10" intransitive())
 Jetty / containerMain := "org.eclipse.jetty.ee10.runner.Runner"
+Jetty / containerPort := 8082
