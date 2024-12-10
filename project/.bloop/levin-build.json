@@ -21,12 +21,15 @@
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/sbt-bloop_2.12_1.0/2.0.5/sbt-bloop_2.12_1.0-2.0.5.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/playframework/twirl/sbt-twirl_2.12_1.0/2.0.6/sbt-twirl_2.12_1.0-2.0.6.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/earldouglas/xsbt-web-plugin_2.12_1.0/4.2.4/xsbt-web-plugin-4.2.4.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sbt-assembly_2.12_1.0/1.1.0/sbt-assembly-1.1.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.10.0/main_2.12-1.10.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/io_2.12/1.10.0/io_2.12-1.10.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/bloop-config_2.12/2.1.0/bloop-config_2.12-2.1.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/playframework/twirl/twirl-compiler_2.12/2.0.6/twirl-compiler_2.12-2.0.6.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-elasticbeanstalk/1.11.1016/aws-java-sdk-elasticbeanstalk-1.11.1016.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.1016/aws-java-sdk-s3-1.11.1016.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.8/scalactic_2.12-3.0.8.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/jarjarabrams/jarjar-abrams-core_2.12/1.8.0/jarjar-abrams-core_2.12-1.8.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/logic_2.12/1.10.0/logic_2.12-1.10.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/actions_2.12/1.10.0/actions_2.12-1.10.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main-settings_2.12/1.10.0/main-settings_2.12-1.10.0.jar",
@@ -58,6 +61,8 @@
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.1016/aws-java-sdk-core-1.11.1016.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/jmespath-java/1.11.1016/jmespath-java-1.11.1016.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.1016/aws-java-sdk-kms-1.11.1016.jar",
+            "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-reflect.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/jarjar/jarjar/1.8.0/jarjar-1.8.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-relation_2.12/1.10.0/util-relation_2.12-1.10.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/completion_2.12/1.10.0/completion_2.12-1.10.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/task-system_2.12/1.10.0/task-system_2.12-1.10.0.jar",
@@ -82,7 +87,6 @@
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-terminal-jna/3.24.1/jline-terminal-jna-3.24.1.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-terminal-jansi/3.24.1/jline-terminal-jansi-3.24.1.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/lmax/disruptor/3.4.2/disruptor-3.4.2.jar",
-            "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-reflect.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-qual/3.4.1/checker-qual-3.4.1.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.4.0/error_prone_annotations-2.4.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.12.0/scala-collection-compat_2.12-2.12.0.jar",
@@ -99,6 +103,11 @@
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.6.7.4/jackson-databind-2.6.7.4.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm/9.2/asm-9.2.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-commons/9.2/asm-commons-9.2.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/ant/ant/1.9.9/ant-1.9.9.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-plugin-api/3.3.9/maven-plugin-api-3.3.9.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-reader/3.24.1/jline-reader-3.24.1.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-builtins/3.24.1/jline-builtins-3.24.1.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-agent/1.10.0/test-agent-1.10.0.jar",
@@ -120,6 +129,12 @@
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.6.0/jackson-annotations-2.6.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.6.7/jackson-core-2.6.7.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.2/asm-tree-9.2.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-analysis/9.2/asm-analysis-9.2.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/ant/ant-launcher/1.9.9/ant-launcher-1.9.9.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-model/3.3.9/maven-model-3.3.9.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-artifact/3.3.9/maven-artifact-3.3.9.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/eclipse/sisu/org.eclipse.sisu.plexus/0.3.2/org.eclipse.sisu.plexus-0.3.2.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-style/3.24.1/jline-style-3.24.1.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist-core-assembly/1.10.0/zinc-persist-core-assembly-1.10.0.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbinary_2.12/0.5.1/sbinary_2.12-0.5.1.jar",
@@ -127,9 +142,16 @@
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.4.2/sourcecode_2.12-0.4.2.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime_2.12/0.11.17/scalapb-runtime_2.12-0.11.17.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-utils/3.0.22/plexus-utils-3.0.22.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/enterprise/cdi-api/1.0/cdi-api-1.0.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/eclipse/sisu/org.eclipse.sisu.inject/0.3.2/org.eclipse.sisu.inject-0.3.2.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-classworlds/2.5.2/plexus-classworlds-2.5.2.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.2/config-1.4.2.jar",
             "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/lenses_2.12/0.11.17/lenses_2.12-0.11.17.jar",
-            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.19.6/protobuf-java-3.19.6.jar"
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.19.6/protobuf-java-3.19.6.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar",
+            "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.jar"
         ],
         "out": "/home/bill/Desktop/levin/project/.bloop/levin-build",
         "classesDir": "/home/bill/Desktop/levin/project/.bloop/levin-build/scala-2.12/sbt-1.0/classes",
@@ -174,8 +196,8 @@
                 "import _root_.sbt._",
                 "import _root_.sbt.Keys._",
                 "import _root_.sbt.nio.Keys._",
-                "import _root_.sbt.ScriptedPlugin.autoImport._, _root_.sbt.plugins.JUnitXmlReportPlugin.autoImport._, _root_.sbt.plugins.MiniDependencyTreePlugin.autoImport._, _root_.bloop.integrations.sbt.BloopPlugin.autoImport._, _root_.play.twirl.sbt.SbtTwirl.autoImport._, _root_.com.earldouglas.xwp.ContainerPlugin.autoImport._, _root_.com.earldouglas.xwp.ElasticBeanstalkDeployPlugin.autoImport._, _root_.com.earldouglas.xwp.HerokuDeploy.autoImport._, _root_.com.earldouglas.xwp.JettyPlugin.autoImport._, _root_.com.earldouglas.xwp.TomcatPlugin.autoImport._, _root_.com.earldouglas.xwp.WarPlugin.autoImport._, _root_.com.earldouglas.xwp.WebappPlugin.autoImport._",
-                "import _root_.sbt.plugins.IvyPlugin, _root_.sbt.plugins.JvmPlugin, _root_.sbt.plugins.CorePlugin, _root_.sbt.ScriptedPlugin, _root_.sbt.plugins.SbtPlugin, _root_.sbt.plugins.SemanticdbPlugin, _root_.sbt.plugins.JUnitXmlReportPlugin, _root_.sbt.plugins.Giter8TemplatePlugin, _root_.sbt.plugins.MiniDependencyTreePlugin, _root_.bloop.integrations.sbt.BloopPlugin, _root_.play.twirl.sbt.SbtTwirl, _root_.com.earldouglas.xwp.ContainerPlugin, _root_.com.earldouglas.xwp.ElasticBeanstalkDeployPlugin, _root_.com.earldouglas.xwp.HerokuDeploy, _root_.com.earldouglas.xwp.JettyPlugin, _root_.com.earldouglas.xwp.TomcatPlugin, _root_.com.earldouglas.xwp.WarPlugin, _root_.com.earldouglas.xwp.WebappPlugin"
+                "import _root_.sbt.ScriptedPlugin.autoImport._, _root_.sbt.plugins.JUnitXmlReportPlugin.autoImport._, _root_.sbt.plugins.MiniDependencyTreePlugin.autoImport._, _root_.bloop.integrations.sbt.BloopPlugin.autoImport._, _root_.play.twirl.sbt.SbtTwirl.autoImport._, _root_.com.earldouglas.xwp.ContainerPlugin.autoImport._, _root_.com.earldouglas.xwp.ElasticBeanstalkDeployPlugin.autoImport._, _root_.com.earldouglas.xwp.HerokuDeploy.autoImport._, _root_.com.earldouglas.xwp.JettyPlugin.autoImport._, _root_.com.earldouglas.xwp.TomcatPlugin.autoImport._, _root_.com.earldouglas.xwp.WarPlugin.autoImport._, _root_.com.earldouglas.xwp.WebappPlugin.autoImport._, _root_.sbtassembly.AssemblyPlugin.autoImport._",
+                "import _root_.sbt.plugins.IvyPlugin, _root_.sbt.plugins.JvmPlugin, _root_.sbt.plugins.CorePlugin, _root_.sbt.ScriptedPlugin, _root_.sbt.plugins.SbtPlugin, _root_.sbt.plugins.SemanticdbPlugin, _root_.sbt.plugins.JUnitXmlReportPlugin, _root_.sbt.plugins.Giter8TemplatePlugin, _root_.sbt.plugins.MiniDependencyTreePlugin, _root_.bloop.integrations.sbt.BloopPlugin, _root_.play.twirl.sbt.SbtTwirl, _root_.com.earldouglas.xwp.ContainerPlugin, _root_.com.earldouglas.xwp.ElasticBeanstalkDeployPlugin, _root_.com.earldouglas.xwp.HerokuDeploy, _root_.com.earldouglas.xwp.JettyPlugin, _root_.com.earldouglas.xwp.TomcatPlugin, _root_.com.earldouglas.xwp.WarPlugin, _root_.com.earldouglas.xwp.WebappPlugin, _root_.sbtassembly.AssemblyPlugin"
             ]
         },
         "test": {
@@ -259,10 +281,13 @@
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/sbt-bloop_2.12_1.0/2.0.5/sbt-bloop_2.12_1.0-2.0.5.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/playframework/twirl/sbt-twirl_2.12_1.0/2.0.6/sbt-twirl_2.12_1.0-2.0.6.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/earldouglas/xsbt-web-plugin_2.12_1.0/4.2.4/xsbt-web-plugin-4.2.4.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sbt-assembly_2.12_1.0/1.1.0/sbt-assembly-1.1.0.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/bloop-config_2.12/2.1.0/bloop-config_2.12-2.1.0.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/playframework/twirl/twirl-compiler_2.12/2.0.6/twirl-compiler_2.12-2.0.6.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-elasticbeanstalk/1.11.1016/aws-java-sdk-elasticbeanstalk-1.11.1016.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.1016/aws-java-sdk-s3-1.11.1016.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.8/scalactic_2.12-3.0.8.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/jarjarabrams/jarjar-abrams-core_2.12/1.8.0/jarjar-abrams-core_2.12-1.8.0.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/plokhotnyuk/jsoniter-scala/jsoniter-scala-core_2.12/2.30.14/jsoniter-scala-core_2.12-2.30.14.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/unroll-annotation_2.12/0.1.12/unroll-annotation_2.12-0.1.12.jar",
                 "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-library.jar",
@@ -272,6 +297,8 @@
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.1016/aws-java-sdk-core-1.11.1016.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/jmespath-java/1.11.1016/jmespath-java-1.11.1016.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.1016/aws-java-sdk-kms-1.11.1016.jar",
+                "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-reflect.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/jarjar/jarjar/1.8.0/jarjar-1.8.0.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalameta/trees_2.12/4.9.6/trees_2.12-4.9.6.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/commons-codec/commons-codec/1.15/commons-codec-1.15.jar",
@@ -280,15 +307,33 @@
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.6.7.4/jackson-databind-2.6.7.4.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm/9.2/asm-9.2.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-commons/9.2/asm-commons-9.2.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/ant/ant/1.9.9/ant-1.9.9.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-plugin-api/3.3.9/maven-plugin-api-3.3.9.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalameta/common_2.12/4.9.6/common_2.12-4.9.6.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.6.0/jackson-annotations-2.6.0.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.6.7/jackson-core-2.6.7.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.2/asm-tree-9.2.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-analysis/9.2/asm-analysis-9.2.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/ant/ant-launcher/1.9.9/ant-launcher-1.9.9.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-model/3.3.9/maven-model-3.3.9.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-artifact/3.3.9/maven-artifact-3.3.9.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/eclipse/sisu/org.eclipse.sisu.plexus/0.3.2/org.eclipse.sisu.plexus-0.3.2.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.4.2/sourcecode_2.12-0.4.2.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime_2.12/0.11.17/scalapb-runtime_2.12-0.11.17.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-utils/3.0.22/plexus-utils-3.0.22.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/enterprise/cdi-api/1.0/cdi-api-1.0.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/eclipse/sisu/org.eclipse.sisu.inject/0.3.2/org.eclipse.sisu.inject-0.3.2.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-classworlds/2.5.2/plexus-classworlds-2.5.2.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/lenses_2.12/0.11.17/lenses_2.12-0.11.17.jar",
                 "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.19.6/protobuf-java-3.19.6.jar",
-                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.12.0/scala-collection-compat_2.12-2.12.0.jar"
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.12.0/scala-collection-compat_2.12-2.12.0.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar",
+                "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.jar"
             ]
         },
         "resolution": {
@@ -341,6 +386,23 @@
                             "name": "xsbt-web-plugin",
                             "classifier": "sources",
                             "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/earldouglas/xsbt-web-plugin_2.12_1.0/4.2.4/xsbt-web-plugin-4.2.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.eed3si9n",
+                    "name": "sbt-assembly",
+                    "version": "1.1.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "sbt-assembly",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sbt-assembly_2.12_1.0/1.1.0/sbt-assembly-1.1.0.jar"
+                        },
+                        {
+                            "name": "sbt-assembly",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sbt-assembly_2.12_1.0/1.1.0/sbt-assembly-1.1.0-sources.jar"
                         }
                     ]
                 },
@@ -409,6 +471,40 @@
                             "name": "aws-java-sdk-s3",
                             "classifier": "sources",
                             "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.1016/aws-java-sdk-s3-1.11.1016-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scalactic",
+                    "name": "scalactic_2.12",
+                    "version": "3.0.8",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scalactic_2.12",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.8/scalactic_2.12-3.0.8.jar"
+                        },
+                        {
+                            "name": "scalactic_2.12",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.8/scalactic_2.12-3.0.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.eed3si9n.jarjarabrams",
+                    "name": "jarjar-abrams-core_2.12",
+                    "version": "1.8.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jarjar-abrams-core_2.12",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/jarjarabrams/jarjar-abrams-core_2.12/1.8.0/jarjar-abrams-core_2.12-1.8.0.jar"
+                        },
+                        {
+                            "name": "jarjar-abrams-core_2.12",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/jarjarabrams/jarjar-abrams-core_2.12/1.8.0/jarjar-abrams-core_2.12-1.8.0-sources.jar"
                         }
                     ]
                 },
@@ -566,6 +662,40 @@
                     ]
                 },
                 {
+                    "organization": "org.scala-lang",
+                    "name": "scala-reflect",
+                    "version": "2.12.19",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-reflect",
+                            "path": "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-reflect.jar"
+                        },
+                        {
+                            "name": "scala-reflect",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.19/scala-reflect-2.12.19-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.eed3si9n.jarjar",
+                    "name": "jarjar",
+                    "version": "1.8.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jarjar",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/jarjar/jarjar/1.8.0/jarjar-1.8.0.jar"
+                        },
+                        {
+                            "name": "jarjar",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/jarjar/jarjar/1.8.0/jarjar-1.8.0-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization": "org.scalameta",
                     "name": "trees_2.12",
                     "version": "4.9.6",
@@ -702,6 +832,91 @@
                     ]
                 },
                 {
+                    "organization": "org.ow2.asm",
+                    "name": "asm",
+                    "version": "9.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "asm",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm/9.2/asm-9.2.jar"
+                        },
+                        {
+                            "name": "asm",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm/9.2/asm-9.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.ow2.asm",
+                    "name": "asm-commons",
+                    "version": "9.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "asm-commons",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-commons/9.2/asm-commons-9.2.jar"
+                        },
+                        {
+                            "name": "asm-commons",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-commons/9.2/asm-commons-9.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.ant",
+                    "name": "ant",
+                    "version": "1.9.9",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "ant",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/ant/ant/1.9.9/ant-1.9.9.jar"
+                        },
+                        {
+                            "name": "ant",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/ant/ant/1.9.9/ant-1.9.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.maven",
+                    "name": "maven-plugin-api",
+                    "version": "3.3.9",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "maven-plugin-api",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-plugin-api/3.3.9/maven-plugin-api-3.3.9.jar"
+                        },
+                        {
+                            "name": "maven-plugin-api",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-plugin-api/3.3.9/maven-plugin-api-3.3.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.commons",
+                    "name": "commons-lang3",
+                    "version": "3.8.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "commons-lang3",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar"
+                        },
+                        {
+                            "name": "commons-lang3",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization": "org.scalameta",
                     "name": "common_2.12",
                     "version": "4.9.6",
@@ -770,6 +985,108 @@
                     ]
                 },
                 {
+                    "organization": "org.ow2.asm",
+                    "name": "asm-tree",
+                    "version": "9.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "asm-tree",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.2/asm-tree-9.2.jar"
+                        },
+                        {
+                            "name": "asm-tree",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.2/asm-tree-9.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.ow2.asm",
+                    "name": "asm-analysis",
+                    "version": "9.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "asm-analysis",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-analysis/9.2/asm-analysis-9.2.jar"
+                        },
+                        {
+                            "name": "asm-analysis",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/ow2/asm/asm-analysis/9.2/asm-analysis-9.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.ant",
+                    "name": "ant-launcher",
+                    "version": "1.9.9",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "ant-launcher",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/ant/ant-launcher/1.9.9/ant-launcher-1.9.9.jar"
+                        },
+                        {
+                            "name": "ant-launcher",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/ant/ant-launcher/1.9.9/ant-launcher-1.9.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.maven",
+                    "name": "maven-model",
+                    "version": "3.3.9",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "maven-model",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-model/3.3.9/maven-model-3.3.9.jar"
+                        },
+                        {
+                            "name": "maven-model",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-model/3.3.9/maven-model-3.3.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.maven",
+                    "name": "maven-artifact",
+                    "version": "3.3.9",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "maven-artifact",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-artifact/3.3.9/maven-artifact-3.3.9.jar"
+                        },
+                        {
+                            "name": "maven-artifact",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/maven/maven-artifact/3.3.9/maven-artifact-3.3.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.eclipse.sisu",
+                    "name": "org.eclipse.sisu.plexus",
+                    "version": "0.3.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "org.eclipse.sisu.plexus",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/eclipse/sisu/org.eclipse.sisu.plexus/0.3.2/org.eclipse.sisu.plexus-0.3.2.jar"
+                        },
+                        {
+                            "name": "org.eclipse.sisu.plexus",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/eclipse/sisu/org.eclipse.sisu.plexus/0.3.2/org.eclipse.sisu.plexus-0.3.2-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization": "com.lihaoyi",
                     "name": "sourcecode_2.12",
                     "version": "0.4.2",
@@ -800,6 +1117,91 @@
                             "name": "scalapb-runtime_2.12",
                             "classifier": "sources",
                             "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime_2.12/0.11.17/scalapb-runtime_2.12-0.11.17-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.codehaus.plexus",
+                    "name": "plexus-utils",
+                    "version": "3.0.22",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "plexus-utils",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-utils/3.0.22/plexus-utils-3.0.22.jar"
+                        },
+                        {
+                            "name": "plexus-utils",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-utils/3.0.22/plexus-utils-3.0.22-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "javax.enterprise",
+                    "name": "cdi-api",
+                    "version": "1.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "cdi-api",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/enterprise/cdi-api/1.0/cdi-api-1.0.jar"
+                        },
+                        {
+                            "name": "cdi-api",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/enterprise/cdi-api/1.0/cdi-api-1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.eclipse.sisu",
+                    "name": "org.eclipse.sisu.inject",
+                    "version": "0.3.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "org.eclipse.sisu.inject",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/eclipse/sisu/org.eclipse.sisu.inject/0.3.2/org.eclipse.sisu.inject-0.3.2.jar"
+                        },
+                        {
+                            "name": "org.eclipse.sisu.inject",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/eclipse/sisu/org.eclipse.sisu.inject/0.3.2/org.eclipse.sisu.inject-0.3.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.codehaus.plexus",
+                    "name": "plexus-component-annotations",
+                    "version": "1.5.5",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "plexus-component-annotations",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar"
+                        },
+                        {
+                            "name": "plexus-component-annotations",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.codehaus.plexus",
+                    "name": "plexus-classworlds",
+                    "version": "2.5.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "plexus-classworlds",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-classworlds/2.5.2/plexus-classworlds-2.5.2.jar"
+                        },
+                        {
+                            "name": "plexus-classworlds",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/codehaus/plexus/plexus-classworlds/2.5.2/plexus-classworlds-2.5.2-sources.jar"
                         }
                     ]
                 },
@@ -851,6 +1253,40 @@
                             "name": "scala-collection-compat_2.12",
                             "classifier": "sources",
                             "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.12.0/scala-collection-compat_2.12-2.12.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "javax.annotation",
+                    "name": "jsr250-api",
+                    "version": "1.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jsr250-api",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar"
+                        },
+                        {
+                            "name": "jsr250-api",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/annotation/jsr250-api/1.0/jsr250-api-1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "javax.inject",
+                    "name": "javax.inject",
+                    "version": "1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "javax.inject",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.jar"
+                        },
+                        {
+                            "name": "javax.inject",
+                            "classifier": "sources",
+                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1-sources.jar"
                         }
                     ]
                 },
@@ -1701,23 +2137,6 @@
                             "name": "disruptor",
                             "classifier": "sources",
                             "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/com/lmax/disruptor/3.4.2/disruptor-3.4.2-sources.jar"
-                        }
-                    ]
-                },
-                {
-                    "organization": "org.scala-lang",
-                    "name": "scala-reflect",
-                    "version": "2.12.19",
-                    "configurations": "default",
-                    "artifacts": [
-                        {
-                            "name": "scala-reflect",
-                            "path": "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-reflect.jar"
-                        },
-                        {
-                            "name": "scala-reflect",
-                            "classifier": "sources",
-                            "path": "/home/bill/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.19/scala-reflect-2.12.19-sources.jar"
                         }
                     ]
                 },
