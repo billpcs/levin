@@ -15,9 +15,6 @@ object JettyLauncher {
     context.addEventListener(new ScalatraListener)
     context.addServlet(classOf[DefaultServlet], "/")
     server.setHandler(context)
-
-
-
     try {
       server.start()
       server.join()

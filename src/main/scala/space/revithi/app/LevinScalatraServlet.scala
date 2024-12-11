@@ -5,11 +5,14 @@ import org.scalatra._
 import scala.annotation.switch
 import play.twirl.api.Html
 import java.io.File
+import java.time.{LocalDateTime, Duration}
 import scala.jdk.CollectionConverters._
 import com.github.benmanes.caffeine.cache.{Caffeine, Cache}
 
 
 class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
+
+  val start_time: LocalDateTime = LocalDateTime.now()
 
   val notFoundCache: Cache[String, Int] = Caffeine.newBuilder()
     .maximumSize(1000) 
@@ -77,10 +80,9 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
   }
 
   get("/stats") {
-    contentType = "text/plain"
-    notFoundCache.asMap().asScala.map { case (url, count) =>
-      s"$url -> $count times"
-    }.mkString("\n")
+    val s = Duration.between(start_time, LocalDateTime.now()).toSeconds()
+    val str = String.format("uptime: %d hours, %d min, %02d sec", s / 3600, (s % 3600) / 60, (s % 60));
+    views.html.stats(str, notFoundCache.asMap().asScala)
   }
 
   notFound {
