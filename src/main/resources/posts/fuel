@@ -1,6 +1,6 @@
 { "title": "Your mental model of fuel consumption is probably wrong", "time": "2026-02-01 20:23:13", "tags": ["cars", "statistics"] }
 
-All modern cars have two useful indicators regarding fuel consumption: km left untill you have to refill, usually indicated by a "⛽" followed the km value, e.g "⛽ 325", as well as a value for average fuel consumption with respect to distance. In some places this is measured in L/100 km, and in others in km/L (as well as their respective imperial counterparts)
+All modern cars have two useful indicators regarding fuel consumption: km left until you have to refill, usually indicated by a "⛽" followed the km value, e.g "⛽ 325", as well as a value for average fuel consumption with respect to distance. In some places this is measured in L/100 km, and in others in km/L (as well as their respective imperial counterparts)
 
 So, anyone who has driven their fair share will know that average fuel consumption gets better when you doing long trips with a sensible speed and really goes downhill when one gets stuck in traffic. This directly gives the impression that being stuck in traffic is really bad for your fuel consumption. This has some truth in it, but I am willing to bet not everyone fully grasps what is happening (at least that's what I hope, I didn't grasp this for a long time).
 
@@ -12,7 +12,7 @@ Let's begin with this realization and we will slowly expand on it:
 
 I work about 30km from where I live. This takes about 40 minutes on a good day, and more than 80 minutes on a bad day. The distance is the same, but the time I spend on a single trip can vary dramatically. So, when I fire up Google Maps, what I always look at, is the time the trip will take. **But the car does not tell me if my fuel will last this amount of time.** 
 
-I would like an indicator that instead of "⛽ 325", says: "more than 12 hours of gas in current driving conditions" and intead of 7L/100km says: "3 L/hour". Especially for city driving, these are much more understandable values. So, let's build them!
+I would like an indicator that instead of "⛽ 325", says: "more than 12 hours of gas in current driving conditions" and instead of 7L/100km says: "3 L/hour". Especially for city driving, these are much more understandable values. So, let's build them!
 
 The car already computes the "range" consumption. Let's stick with the 7L/100km value.
 
@@ -42,7 +42,7 @@ Now, let's get us stuck in traffic. An average speed value usually used for traf
 41 L / (3 L/h) = ~ 13.5 hours of fuel
 ```
 
-It's clear that we can be stuck in traffic for much longer that we can be traveling. The range-based consumption hides the fact that the engine "sips" less gas in the same amount of time, because it frames everything around km travelled. I argue that this is not helpful for city driving.
+It's clear that we can be stuck in traffic for much longer that we can be traveling. The range-based consumption hides the fact that the engine "sips" less gas in the same amount of time, because it frames everything around km traveled. I argue that this is not helpful for city driving.
 
 # Bonus
 
@@ -52,4 +52,4 @@ This is fixed with the time-based consumption, as it can definitely show what th
 
 # Final takeaway
 
-None of this means traffic is “good” for fuel consumption. It is inefficient, both per distance and per trip. The point is that it is far less threatening in terms of fuel endurance than the dashboard numbers suggest. As a person highly anxious for this stuff, realising this puts me at ease. 
+None of this means traffic is “good” for fuel consumption. It is inefficient, both per distance and per trip. The point is that it is far less threatening in terms of fuel endurance than the dashboard numbers suggest. As a person highly anxious for this stuff, realizing this puts me at ease. 
