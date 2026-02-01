@@ -1,6 +1,6 @@
 { "title": "Your mental model of fuel consumption is probably wrong", "time": "2026-02-01 20:23:13", "tags": ["cars", "statistics"] }
 
-All modern cars have two useful indicators regarding fuel consumption: km left untill you have to refill, usually indicated by a "⛽" and the km left to drive, e.g "⛽ 325", as well as a value for average fuel consumption. In some places it is measured in L/100 km, and in others in km/L (as well as their respective imperial counterparts)
+All modern cars have two useful indicators regarding fuel consumption: km left untill you have to refill, usually indicated by a "⛽" followed the km value, e.g "⛽ 325", as well as a value for average fuel consumption with respect to distance. In some places this is measured in L/100 km, and in others in km/L (as well as their respective imperial counterparts)
 
 So, anyone who has driven their fair share will know that average fuel consumption gets better when you doing long trips with a sensible speed and really goes downhill when one gets stuck in traffic. This directly gives the impression that being stuck in traffic is really bad for your fuel consumption. This has some truth in it, but I am willing to bet not everyone fully grasps what is happening (at least that's what I hope, I didn't grasp this for a long time).
 
