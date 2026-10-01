@@ -7,16 +7,16 @@ import play.twirl.api.Html
 import java.io.File
 import java.time.{LocalDateTime, Duration}
 import scala.jdk.CollectionConverters._
+import jakarta.servlet.RequestDispatcher
 import com.github.benmanes.caffeine.cache.{Caffeine, Cache}
 
 
-class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
+class LevinScalatraFilter(
+    posts: Map[String, Post],
+    notFoundCache: Cache[String, Int]
+) extends ScalatraFilter {
 
   val start_time: LocalDateTime = LocalDateTime.now()
-
-  val notFoundCache: Cache[String, Int] = Caffeine.newBuilder()
-    .maximumSize(1000) 
-    .build()
 
   val posts_sorted = posts.values.toList.sortWith{
       case (a,b) => a.metadata.time > b.metadata.time
@@ -83,14 +83,5 @@ class LevinScalatraServlet(posts: Map[String, Post]) extends ScalatraServlet {
     val s = Duration.between(start_time, LocalDateTime.now()).toSeconds()
     val str = String.format("uptime: %d hours, %d min, %02d sec", s / 3600, (s % 3600) / 60, (s % 60));
     views.html.stats(str, notFoundCache.asMap().asScala)
-  }
-
-  notFound {
-    val requestUrl = request.getRequestURI
-    serveStaticResource() getOrElse {
-      val newCount = notFoundCache.get(requestUrl, _ => 0) + 1
-      notFoundCache.put(requestUrl, newCount)
-      NotFound(views.html.notfound())
-    }
   }
 }
