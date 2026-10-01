@@ -53,7 +53,11 @@ object PostReader {
       List.empty
     )
     val post_names = posts.map(_.getName)
-    val post_contents = posts.map(io.Source.fromFile(_).mkString)
+    val post_contents = posts.map { file =>
+      val source = io.Source.fromFile(file)
+      try source.mkString
+      finally source.close()
+    }
     post_names.zip(post_contents)
   }
 
