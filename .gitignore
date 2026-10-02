@@ -1,6 +1,11 @@
-src/src
-assets/rss.xml
-.metals/
-project/target/
-target/
-levin
+# SBT
+/target/
+/project/target/
+/project/project/
+
+# Metals / Bloop
+/.metals/
+/.bloop/
+/.bsp/
+/project/.bloop/
+/project/metals.sbt
