@@ -171,9 +171,9 @@
             ],
             "jars": [
                 "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-library.jar",
-                "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-compiler.jar",
+                "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-xml_2.12-2.2.0.jar",
                 "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-reflect.jar",
-                "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-xml_2.12-2.2.0.jar"
+                "/home/bill/.sbt/boot/scala-2.12.19/lib/scala-compiler.jar"
             ],
             "setup": {
                 "order": "mixed",
