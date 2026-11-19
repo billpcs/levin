@@ -1,11 +1,10 @@
-# SBT
+# sbt build outputs and generated meta-builds
 /target/
 /project/target/
 /project/project/
 
-# Metals / Bloop
-/.metals/
-/.bloop/
-/.bsp/
-/project/.bloop/
+# Metals and Bloop generated files
+.metals/
+.bloop/
+.bsp/
 /project/metals.sbt
