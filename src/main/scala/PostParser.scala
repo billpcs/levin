@@ -3,8 +3,8 @@ package space.revithi
 import upickle.default.*
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
-import java.io.File
-import java.nio.file.{Files, Paths}
+import scala.io.Source
+import scala.util.Using
 
 type PostId = String
 type RawPostContents = String
@@ -35,30 +35,17 @@ case class Post(
 
 object PostReader {
 
-  def allFilesUnderProjectPath(
-      relativePath: String
-  ): Option[Seq[java.io.File]] = {
-    val projectRoot = System.getProperty("user.dir")
-    val dirPath = Paths.get(projectRoot, relativePath).toString
-    val directory = new File(dirPath)
-    if (directory.exists && directory.isDirectory) {
-      Some(directory.listFiles.filter(_.isFile))
-    } else {
-      None
-    }
-  }
-
   def readPosts(): Seq[(PostId, RawPostContents)] = {
-    val posts = allFilesUnderProjectPath("src/main/resources/posts/").getOrElse(
-      List.empty
-    )
-    val post_names = posts.map(_.getName)
-    val post_contents = posts.map { file =>
-      val source = io.Source.fromFile(file)
-      try source.mkString
-      finally source.close()
+    val loader = getClass.getClassLoader
+    val names = Using.resource(Source.fromResource("posts.index", loader)(scala.io.Codec.UTF8)) {
+      _.getLines().toList
     }
-    post_names.zip(post_contents)
+    names.map { name =>
+      val contents = Using.resource(Source.fromResource(s"posts/$name", loader)(scala.io.Codec.UTF8)) {
+        _.mkString
+      }
+      name -> contents
+    }
   }
 
   def splitMetadataAndContents(post: String): (String, String) = {
